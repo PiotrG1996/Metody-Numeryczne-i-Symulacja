@@ -382,7 +382,7 @@ for root in roots:
 
 # Laboratorium 3: Analiza sygnałów zaszumionych
 
-## 1. Wprowadzenie
+## Wprowadzenie
 
 W ćwiczeniu opracowany został program, który na podstawie plików wejściowych:
 1. **arguments of sine.txt** - sygnał wejściowy wymuszenia
@@ -391,7 +391,7 @@ W ćwiczeniu opracowany został program, który na podstawie plików wejściowyc
 
 Program analizuje sygnał wzorcowy oraz zaszumiony, obliczając błędy, wartość skuteczną, odchylenie standardowe oraz błędy średnie.
 
-## 2. Zadania
+## Zadania
 
 ### Zadanie 1 - Określenie błędów dla poszczególnych próbek sygnału
 
@@ -416,3 +416,70 @@ errors = noise_values - sine_values
 # Wyświetlenie wyników
 print("Błędy dla poszczególnych próbek sygnału:")
 print(errors)
+
+### Zadanie 2 - Określ jaki jest błąd średni (względny, bezwzględny dla sygnału zaszumionego i wzorcowego) oraz jak on wpływa na kształt zaszumionego sygnału (obliczyć nowe wartości próbek zaszumionych z uwzględnieniem błędu średniego).
+
+```python
+
+# Obliczanie błędu średniego bezwzględnego
+mean_absolute_error = np.mean(np.abs(errors))
+
+# Obliczanie błędu średniego względnego
+mean_relative_error = np.mean(np.abs(errors / sine_values))
+
+print(f"Błąd średni bezwzględny: {mean_absolute_error}")
+print(f"Błąd średni względny: {mean_relative_error}")
+
+# Obliczanie nowych próbek zaszumionych uwzględniając błąd średni
+corrected_noise_values = noise_values - mean_absolute_error
+print("Skorygowane wartości próbek zaszumionych:")
+print(corrected_noise_values)
+```
+
+### 3. Określenie wartości skutecznej sygnałów
+```python
+
+# Obliczanie wartości skutecznej dla sygnałów
+effective_value_sine = np.sqrt(np.mean(sine_values**2))
+effective_value_noise = np.sqrt(np.mean(noise_values**2))
+
+print(f"Wartość skuteczna sygnału sine.txt: {effective_value_sine}")
+print(f"Wartość skuteczna sygnału sine with noise.txt: {effective_value_noise}")
+```
+
+### 4. Określ jakie jest odchylenie standardowe dla zaszumionego sygnału, porównaj z sygnałem, w którym wprowadzono korektę w postaci błędu średniego.
+
+```python
+# Obliczanie odchylenia standardowego dla zaszumionego sygnału
+std_noise = np.std(noise_values)
+
+# Obliczanie odchylenia standardowego dla skorygowanego sygnału
+std_corrected_noise = np.std(corrected_noise_values)
+
+print(f"Odchylenie standardowe dla zaszumionego sygnału: {std_noise}")
+print(f"Odchylenie standardowe dla skorygowanego sygnału: {std_corrected_noise}")
+```
+
+### 5. Rozkład błędów wokół wartości średniej Rozkład błędów wokół średniej możemy zwizualizować przy pomocy histogramu. Histogram przedstawia rozkład błędów w obrębie wartości średniej.
+
+```python
+import matplotlib.pyplot as plt
+
+# Rysowanie histogramu błędów
+plt.hist(errors, bins=30, edgecolor='black')
+plt.title('Rozkład błędów wokół wartości średniej')
+plt.xlabel('Błąd')
+plt.ylabel('Liczba próbek')
+plt.show()
+```
+
+### 6. Określ ile wynosi błąd średniej arytmetycznej
+```python
+# Obliczanie błędu średniej arytmetycznej
+mean_noise = np.mean(noise_values)
+mean_sine = np.mean(sine_values)
+
+mean_error = mean_noise - mean_sine
+print(f"Błąd średniej arytmetycznej: {mean_error}")
+```
+
