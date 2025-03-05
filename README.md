@@ -416,8 +416,11 @@ errors = noise_values - sine_values
 # Wyświetlenie wyników
 print("Błędy dla poszczególnych próbek sygnału:")
 print(errors)
+```
 
 ### Zadanie 2 - Określ jaki jest błąd średni (względny, bezwzględny dla sygnału zaszumionego i wzorcowego) oraz jak on wpływa na kształt zaszumionego sygnału (obliczyć nowe wartości próbek zaszumionych z uwzględnieniem błędu średniego).
+
+![Przykład](images/blad_sredni.png)
 
 ```python
 
@@ -437,6 +440,9 @@ print(corrected_noise_values)
 ```
 
 ### 3. Określenie wartości skutecznej sygnałów
+
+![Przykład](images/wartosc_skuteczna.png)
+
 ```python
 
 # Obliczanie wartości skutecznej dla sygnałów
@@ -448,6 +454,9 @@ print(f"Wartość skuteczna sygnału sine with noise.txt: {effective_value_noise
 ```
 
 ### 4. Określ jakie jest odchylenie standardowe dla zaszumionego sygnału, porównaj z sygnałem, w którym wprowadzono korektę w postaci błędu średniego.
+
+![Przykład](images/odchylenie.png)
+
 
 ```python
 # Obliczanie odchylenia standardowego dla zaszumionego sygnału
