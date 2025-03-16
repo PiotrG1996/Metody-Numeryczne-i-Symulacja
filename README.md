@@ -1008,4 +1008,162 @@ plt.show()
 
 ```
 
+# Laboratorium 6 - Różniczkowanie numeryczne
+
+### 1. Generowanie funkcji trójkątnej
+
+```python
+import numpy as np
+
+def triangular_wave(k_max, omega, x):
+    """
+    Generuje funkcję trójkątną.
+    
+    Parametry:
+    k_max (int): Maksymalny rząd harmonicznej.
+    omega (float): Częstotliwość sygnału.
+    x (float): Argument funkcji.
+    
+    Zwraca:
+    float: Wartość funkcji trójkątnej.
+    """
+    result = 0
+    for k in range(k_max + 1):
+        result += ((-1)**k) * np.sin((2*k + 1) * omega * x) / ((2*k + 1)**2)
+    return (8 / np.pi**2) * result
+```
+
+### 2. Obliczanie pochodnej za pomocą różnicy dzielonej w przód
+
+```python
+def forward_difference(f, x, h):
+    """
+    Oblicza pochodną funkcji f w punkcie x za pomocą różnicy dzielonej w przód.
+    
+    Parametry:
+    f (function): Funkcja, której pochodna ma zostać obliczona.
+    x (float): Punkt, w którym obliczamy pochodną.
+    h (float): Krok różniczkowania.
+    
+    Zwraca:
+    float: Przybliżona wartość pochodnej funkcji f w punkcie x.
+    """
+    return (f(x + h) - f(x)) / h
+```
+
+### 3. Obliczanie pochodnej za pomocą różnicy centralnej
+```python
+
+def central_difference(f, x, h):
+    """
+    Oblicza pochodną funkcji f w punkcie x za pomocą różnicy centralnej.
+    
+    Parametry:
+    f (function): Funkcja, której pochodna ma zostać obliczona.
+    x (float): Punkt, w którym obliczamy pochodną.
+    h (float): Krok różniczkowania.
+    
+    Zwraca:
+    float: Przybliżona wartość pochodnej funkcji f w punkcie x.
+    """
+    return (f(x + h) - f(x - h)) / (2 * h)
+```
+
+### 4. Rozwiązywanie równania różniczkowego metodą Eulera w tył
+```python
+from scipy.optimize import fsolve
+
+def backward_euler(f, y0, x0, h, num_steps):
+    """
+    Rozwiązuje równanie różniczkowe metodą Eulera w tył.
+    
+    Parametry:
+    f (function): Funkcja różniczkowa.
+    y0 (float): Początkowa wartość y.
+    x0 (float): Początkowy punkt x.
+    h (float): Krok różniczkowania.
+    num_steps (int): Liczba kroków.
+    
+    Zwraca:
+    list: Listę wartości y dla kolejnych kroków.
+    """
+    x = x0
+    y = y0
+    results = [y]
+    
+    for _ in range(num_steps):
+        # Rozwiązywanie równania nieliniowego dla y_{n+1}
+        y_next = fsolve(lambda y_next: y - y_next + h * f(x + h, y_next), y)
+        y = y_next[0]
+        x += h
+        results.append(y)
+        
+    return results
+
+```
+
+### 5. Porównanie wyników metod Eulera w przód i w tył
+
+```python
+import matplotlib.pyplot as plt
+
+# Funkcja różniczkowa dla przykładu
+def dy_dx(x, y):
+    return y**2
+
+# Parametry
+omega = 0.25
+k_max = 10  # Rząd harmonicznej
+x_vals = np.linspace(0, 0.1, 100)  # Zakres x
+y_vals = [triangular_wave(k_max, omega, x) for x in x_vals]
+
+# Wyniki metod Eulera w przód i w tył
+h_values = [1, 0.1, 0.02]
+for h in h_values:
+    forward_results = [forward_difference(lambda x: triangular_wave(k_max, omega, x), x, h) for x in x_vals]
+    backward_results = backward_euler(dy_dx, y_vals[0], x_vals[0], h, len(x_vals) - 1)
+    
+    plt.plot(x_vals, forward_results, label=f'Forward Euler (h={h})')
+    plt.plot(x_vals, backward_results, label=f'Backward Euler (h={h})')
+
+plt.legend()
+plt.xlabel("x")
+plt.ylabel("y'")
+plt.title("Porównanie metod Eulera w przód i w tył")
+plt.grid(True)
+plt.show()
+```
+
+## Opis działania kodu:
+
+### Funkcja trójkątna:
+Generuje sygnał trójkątny na podstawie wzoru podanego w zadaniu. Jest to suma szeregu, który jest przybliżony do skończonej liczby składników.
+
+### Metody różniczkowania:
+
+- **Metoda Eulera w przód** oblicza pochodną na podstawie wzoru różnicy dzielonej w przód.
+- **Metoda Eulera w tył** stosuje metodę Eulera w tył do rozwiązania równania różniczkowego \( y' = y^2 \) numerycznie.
+
+### Porównanie wyników:
+Dla każdej wartości \( h \) (1, 0.1, 0.02), obliczamy pochodną za pomocą obu metod i porównujemy wyniki. Dodatkowo, obliczamy maksymalną różnicę między wynikami obliczonymi metodą Eulera w przód i w tył.
+
+### Wykres:
+Na wykresie porównujemy wyniki obu metod dla różnych wartości \( h \).
+
+### Maksymalna różnica:
+Wypisujemy maksymalną różnicę w obliczeniu pochodnej pomiędzy oboma podejściami dla każdej wartości \( h \).
+
+---
+
+## Oczekiwane wyniki i wnioski:
+
+### Wpływ wartości \( h \):
+Zmniejszenie \( h \) powinno prowadzić do dokładniejszych wyników, ponieważ mniejsze kroki numeryczne powodują lepsze przybliżenie pochodnej.  
+Jednak zbyt małe wartości \( h \) mogą prowadzić do błędów zaokrągleń w obliczeniach numerycznych, zwłaszcza w przypadku metody Eulera w przód.
+
+### Różnice między metodami:
+- Metoda Eulera w tył jest stabilniejsza numerycznie, zwłaszcza dla większych wartości \( h \), ale może dawać wyniki różniące się od tych uzyskanych za pomocą metody Eulera w przód, szczególnie dla dużych kroków.
+- Maksymalna różnica w obliczeniu pochodnej będzie zależna od wartości \( h \), a także od tego, jak blisko wartości rzeczywistej pochodnej uda się przybliżyć wyniki uzyskane przez obie metody.
+
+Po uruchomieniu powyższego kodu, otrzymasz wykres porównujący wyniki oraz maksymalne różnice między metodami dla różnych wartości \( h \). Na podstawie tych wyników będziesz mógł wyciągnąć wnioski na temat stabilności i dokładności obu metod.
 
