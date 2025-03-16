@@ -1167,3 +1167,138 @@ Jednak zbyt małe wartości \( h \) mogą prowadzić do błędów zaokrągleń w
 
 Po uruchomieniu powyższego kodu, otrzymasz wykres porównujący wyniki oraz maksymalne różnice między metodami dla różnych wartości \( h \). Na podstawie tych wyników będziesz mógł wyciągnąć wnioski na temat stabilności i dokładności obu metod.
 
+
+# Laboratorium 7 - Całkowanie numeryczne
+
+## 1. Implementacja metod prostokątów oraz trapezów
+
+### Metoda prostokątów
+Metoda prostokątów jest jedną z najprostszych metod numerycznego całkowania, która przybliża całkę funkcji poprzez zastosowanie funkcji stałej w przedziale całkowania.
+
+```python
+def q_rect(a, b, n, f):
+    h = (b - a) / n
+    sum = 0
+    for i in range(n):
+        sum += f(a + (i + 0.5) * h)  # Punkt środkowy
+    return sum * h
+```
+
+### Metoda trapezów
+Metoda trapezów przybliża całkę funkcji poprzez użycie funkcji liniowej w przedziale całkowania.
+
+```python
+def q_trap(a, b, n, f):
+    h = (b - a) / n
+    sum = 0.5 * (f(a) + f(b))  # Dodajemy wartości na końcach przedziału
+    for i in range(1, n):
+        sum += f(a + i * h)  # Dodajemy wartości w punktach wewnętrznych
+    return sum * h
+```
+
+### Sprawdzenie metod na funkcjach sin(x) i cos(x)
+
+Do testowania metod użyjemy funkcji sin(x) oraz cos(x) w zakresie od 0 do 2𝜋.
+```python
+import math
+
+# Definicja funkcji
+def sin_func(x):
+    return math.sin(x)
+
+def cos_func(x):
+    return math.cos(x)
+
+# Obliczanie całek
+a, b = 0, 2 * math.pi
+n = 1000  # Ilość przedziałów
+
+result_sin = q_rect(a, b, n, sin_func), q_trap(a, b, n, sin_func)
+result_cos = q_rect(a, b, n, cos_func), q_trap(a, b, n, cos_func)
+
+print(f"Całka sin(x): Prostokąty = {result_sin[0]}, Trapezy = {result_sin[1]}")
+print(f"Całka cos(x): Prostokąty = {result_cos[0]}, Trapezy = {result_cos[1]}")
+```
+
+### 3. Generowanie przebiegu prostokątnego
+
+
+```python
+def fsquare(t, omega):
+    result = 0
+    for k in range(1, 10):  # Pierwsze 10 składników szereg
+        result += (4 / math.pi) * (1 / (2 * k - 1)) * math.sin(2 * math.pi * (2 * k - 1) * omega * t)
+    return result
+```
+
+### 4. Porównanie metod całkowania dla funkcji prostokątnej
+
+```python
+def square_wave(t, period):
+    return 1 if (t % period) < (period / 2) else -1
+
+# Całkowanie funkcji prostokątnej
+period = 1  # Okres funkcji prostokątnej
+n = 1000  # Ilość przedziałów
+result_square_wave_rect = q_rect(0, 2 * period, n, square_wave)
+result_square_wave_trap = q_trap(0, 2 * period, n, square_wave)
+
+print(f"Całka funkcji prostokątnej (prostokąty) = {result_square_wave_rect}")
+print(f"Całka funkcji prostokątnej (trapezy) = {result_square_wave_trap}")
+```
+
+### 5. 
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Definicja czasu
+t = np.linspace(0, 2 * period, 1000)
+
+# Przebieg funkcji prostokątnej
+square_wave_values = np.array([square_wave(ti, period) for ti in t])
+
+# Całkowanie
+integral_values = np.cumsum(square_wave_values) * (t[1] - t[0])
+
+# Wykresy
+plt.figure(figsize=(10, 5))
+plt.subplot(2, 1, 1)
+plt.plot(t, square_wave_values, label="Funkcja prostokątna")
+plt.title("Przebieg funkcji prostokątnej")
+plt.grid()
+
+plt.subplot(2, 1, 2)
+plt.plot(t, integral_values, label="Całka funkcji prostokątnej", color='r')
+plt.title("Przebieg całki funkcji prostokątnej")
+plt.grid()
+
+plt.tight_layout()
+plt.show()
+```
+
+### 6. Implementacja metody Romberga
+```python
+import numpy as np
+
+def romberg(a, b, f, max_iter=10):
+    R = np.zeros((max_iter, max_iter))
+    h = b - a
+
+    # Pierwsze przybliżenie (metoda trapezów)
+    R[0, 0] = 0.5 * h * (f(a) + f(b))
+    
+    # Wypełnianie tabeli Romberga
+    for i in range(1, max_iter):
+        h /= 2
+        sum_f = sum(f(a + (2 * k - 1) * h) for k in range(1, 2**i, 2))
+        R[i, 0] = 0.5 * R[i-1, 0] + sum_f * h
+
+        # Ekstrapolacja Richardsona
+        for k in range(1, i + 1):
+            R[i, k] = (4**k * R[i, k-1] - R[i-1, k-1]) / (4**k - 1)
+
+    return R[max_iter-1, max_iter-1]
+```
+
