@@ -492,3 +492,319 @@ mean_error = mean_noise - mean_sine
 print(f"Błąd średniej arytmetycznej: {mean_error}")
 ```
 
+# Laboratorium 4: Rozwiązywanie równań nieliniowych
+
+
+## 3.1 Metoda Bisekcji
+
+## Przykład: Pierwiastek Trzeciego Stopnia
+
+Problem obliczenia pierwiastka trzeciego stopnia z liczby \( a \) można sprowadzić do znalezienia pierwiastka równania:
+
+$$ f(x) = x^3 - a $$
+
+### Implementacja funkcji w Pythonie:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Funkcja definiująca równanie
+def zadanie(x, z):
+    return x**3 - z
+
+# Funkcja do podziału przedziałów
+def szukanie(gr_l, gr_p):
+    return gr_l + (gr_p - gr_l) / 2
+
+# Inicjalizacja
+gr_l = -2
+gr_p = 2
+z = 3  # Szukamy pierwiastka z 3
+delta = 10**-5
+t = np.linspace(gr_l, gr_p, 1000)
+
+# Metoda bisekcji
+n = 1
+tn = [n - 1]
+x = [gr_p]
+gr_c = gr_p
+
+while abs(zadanie(gr_c, z)) > delta and abs(gr_p - gr_l) > delta:
+    n += 1
+    tn.append(n - 1)
+    gr_c = szukanie(gr_l, gr_p)
+    yc = zadanie(gr_c, z)
+    ya = zadanie(gr_l, z)
+    zero = ya * yc
+    
+    if zero < 0:
+        gr_p = gr_c
+    else:
+        gr_l = gr_c
+
+    x.append(gr_c)
+
+# Wykres iteracji
+plt.subplot(121)
+plt.plot(t, zadanie(t, z))
+plt.axhline(0, color='black',linewidth=1)
+plt.axvline(0, color='black',linewidth=1)
+plt.title('Wykres funkcji')
+
+plt.subplot(122)
+plt.plot(tn, x)
+plt.title('Zbieżność metody bisekcji')
+
+plt.show()
+```
+
+### 1: Zaimplementowanie algorytmu obliczania miejsc zerowych dla funkcji:
+$$ \( f(x) = x^2 - 2 \) $$ 
+### w przedziale [0, 3].
+
+```python
+import numpy as np
+
+def f(x):
+    """Funkcja, dla której szukamy pierwiastka: f(x) = x^2 - 2"""
+    return x**2 - 2
+
+def bisection_method(f, a, b, delta):
+    """
+    Implementacja metody bisekcji do znalezienia pierwiastka funkcji f w przedziale [a, b].
+    """
+    iterations = []
+    while abs(b - a) > delta:
+        c = (a + b) / 2
+        iterations.append([a, b, c])
+        if f(c) == 0:
+            return c, np.array(iterations)  
+        elif f(a) * f(c) < 0:
+            b = c  
+        else:
+            a = c  
+    return (a + b) / 2, np.array(iterations)
+
+# Definicja parametrów
+a, b, delta = 0, 3, 1e-5
+root, iterations = bisection_method(f, a, b, delta)
+print(f"Pierwiastek: {root}")
+
+# Tabela zostanie wygenerowana za pomocą numpy.array, która zawiera iteracyjne wartości 
+print("Tabela iteracji:")
+print(iterations)
+```
+
+### 2: Przedstaw w postaci tabeli kolejne kroki przybliżeń jakie zostały otrzymane.
+
+```python
+import pandas as pd
+
+pd.DataFrame(iterations, columns=["a", "b", "c"])
+```
+
+### 3: Testowanie algorytmu dla różnych wartości dokładności (delta)
+
+```python
+# Możemy zmieniać wartość delta i obserwować wpływ na liczbę iteracji:
+# Testowanie dla różnych wartości delta
+
+deltas = [1e-1, 1e-2, 1e-3, 1e-4, 1e-5]
+for delta in deltas:
+    root, iterations = bisection_method(f, a, b, delta)
+    print(f"Pierwiastek dla delta={delta}: {root}, Liczba iteracji: {iterations.shape[0]}")
+```
+
+### 4: Jak zmienia się liczba iteracji w zależności od delta
+Liczba iteracji będzie maleć w miarę zmniejszania się wartości delta, ponieważ dokładność rozwiązania będzie coraz wyższa.
+
+### 5: Modyfikacja skryptu do wyznaczania miejsc zerowych w przedziale [-3, 3]
+Aby znaleźć pierwiastki w przedziale [-3, 3], wystarczy zmienić przedziały na:
+
+```python
+a, b = -3, 3
+root, iterations = bisection_method(f, a, b, delta)
+
+# 3.2 Metoda Newtona
+### 1: Implementacja algorytmu obliczania pierwiastka trzeciego stopnia
+
+```python
+def f_cubic(x, a):
+    """Funkcja, dla której szukamy pierwiastka trzeciego stopnia: f(x) = x^3 - a"""
+    return x**3 - a
+
+def f_cubic_derivative(x):
+    """Pochodna funkcji f_cubic(x, a) względem x"""
+    return 3 * x**2
+
+def newton_method(f, f_prime, x0, delta, max_iter=1000):
+    """Metoda Newtona do znalezienia pierwiastka funkcji f."""
+    iterations = []
+    x = x0
+    for i in range(max_iter):
+        x_new = x - f(x) / f_prime(x)
+        iterations.append([i, x, x_new])
+        if abs(x_new - x) < delta:
+            return x_new, np.array(iterations)
+        x = x_new
+    return x, np.array(iterations)
+```
+
+### 2: Wybór metody określania dokładności obliczeń
+Użyjemy warunku zakończenia: 
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+        # Warunek końcowy: sprawdzamy, czy wartość funkcji jest wystarczająco bliska zeru
+        if abs(fx) <= epsilon:
+            break  # Zakończenie obliczeń, gdy funkcja jest bliska zeru
+        
+        x = x_new  # Przechodzimy do nowego przybliżenia
+    
+    return x_values
+
+# Wybór liczby podpierwiastkowej (np. pierwiastek trzeciego stopnia z 27)
+a = 27
+epsilon = 1e-6
+max_iter = 100
+
+# Punkt startowy (możesz dowolnie zmienić)
+x0 = 5
+
+# Obliczanie przybliżeń
+x_values = newton_cubic_root(a, epsilon, max_iter, x0)
+```
+
+### 3: Modyfikacja programu dla różnych punktów startowych
+Aby zrealizować ten punkt, generujemy różne wartości początkowe 
+
+```python
+import matplotlib.pyplot as plt
+
+chosen_number = 27
+random_x0s = np.random.randint(1, chosen_number, 4)
+plt.figure(figsize=(10, 6))
+for x0 in random_x0s:
+    _, iterations = newton_method(lambda x: f_cubic(x, chosen_number), f_cubic_derivative, x0, 1e-5)
+    iterations = np.array(iterations)
+    plt.plot(iterations[:, 0], iterations[:, 2], label=f"x0 = {x0}")
+
+plt.xlabel("Iteracja")
+plt.ylabel("xk")
+plt.legend()
+plt.title(f"Dążenie algorytmu Newtona do wyniku dla liczby {chosen_number}")
+plt.show()
+```
+
+### 4: wylosuj cztery różne punkty startowe i wykreśl zależność pokazującą dążenie algorytmu do wyniku (xk = f(iteracja))
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Funkcja obliczająca pierwiastek trzeciego stopnia
+def newton_cubic_root(a, epsilon=1e-6, max_iter=100, x0=None):
+    # Funkcja f(x) = x^3 - a
+    # Pochodna f'(x) = 3 * x^2
+    if x0 is None:
+        x0 = a / 2  # Startowy punkt (można zmienić, ale stały dla wszystkich przypadków)
+    
+    x = x0
+    iterations = 0
+    x_values = [x]  # Lista przechowująca wartości x w każdej iteracji
+    
+    while iterations < max_iter:
+        fx = x**3 - a
+        fpx = 3 * x**2
+        x_new = x - fx / fpx
+        x_values.append(x_new)
+        iterations += 1
+        if abs(x_new - x) < epsilon:
+            break
+        x = x_new
+        
+    return x_values
+
+# Wybór liczby podpierwiastkowej (np. pierwiastek trzeciego stopnia z 27)
+a = 27
+epsilon = 1e-6
+max_iter = 100
+
+# Losowanie czterech różnych punktów startowych
+np.random.seed(42)  # Ustawiamy ziarno dla powtarzalności wyników
+start_points = np.random.uniform(1, 10, 4)  # Losujemy 4 różne punkty startowe w zakresie [1, 10]
+
+# Tworzymy wykres
+plt.figure(figsize=(10, 6))
+
+# Dla każdego punktu startowego obliczamy iteracje i rysujemy wykres
+for x0 in start_points:
+    x_values = newton_cubic_root(a, epsilon, max_iter, x0)
+    plt.plot(range(len(x_values)), x_values, label=f'Start: {x0:.2f}')
+
+# Dodajemy legendę, tytuł, etykiety i siatkę
+plt.title(f"Zbieżność algorytmu Newtona dla pierwiastka 3 stopnia z {a}")
+plt.xlabel("Iteracja")
+plt.ylabel("Wartość x (przybliżenie pierwiastka)")
+plt.legend(title="Punkty startowe")
+plt.grid(True)
+
+# Wyświetlamy wykres
+plt.show()
+```
+
+### 5: Obliczenie pierwiastków 3 stopnia dla liczb w zakresie od 1 do 100000
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Funkcja obliczająca pierwiastek trzeciego stopnia
+def newton_cubic_root(a, epsilon=1e-6, max_iter=100):
+    # Funkcja f(x) = x^3 - a
+    # Pochodna f'(x) = 3x^2
+    x = a / 2  # Startowy punkt (można zmienić, ale stały dla wszystkich przypadków)
+    iterations = 0
+    while iterations < max_iter:
+        fx = x**3 - a
+        fpx = 3 * x**2
+        x_new = x - fx / fpx
+        iterations += 1
+        if abs(x_new - x) < epsilon:
+            break
+        x = x_new
+    return x, iterations
+
+# Zakres liczb, dla których obliczamy pierwiastki (od 1 do 100000)
+numbers = np.arange(1, 100001)
+iterations_list = []
+
+# Oblicz pierwiastki i liczbę iteracji
+for num in numbers:
+    _, iterations = newton_cubic_root(num)
+    iterations_list.append(iterations)
+
+# Wykres liczby iteracji w zależności od liczby podpierwiastkowej
+plt.figure(figsize=(10, 6))
+plt.plot(numbers[:1000], iterations_list[:1000], marker='o', linestyle='-', color='b')  # Wyświetlamy tylko pierwsze 1000 punktów dla lepszej wizualizacji
+plt.title("Liczba iteracji algorytmu Newtona w zależności od liczby podpierwiastkowej (1 do 100000)")
+plt.xlabel("Liczba podpierwiastkowa (a)")
+plt.ylabel("Liczba iteracji")
+plt.grid(True)
+plt.show()
+
+# Korelacja Pearsona między liczbą podpierwiastkową a liczbą iteracji
+correlation = np.corrcoef(numbers, iterations_list)
+print(f"Współczynnik korelacji Pearsona: {correlation[0, 1]}")
+
+```
+
+### 5: Korelacja między liczbą podpierwiastkową a ilością iteracji
+Na wykresie widać, jak liczba iteracji zmienia się w zależności od liczby podpierwiastkowej. Wiele razy liczba iteracji nie zależy w prosty sposób od wartości 
+𝑎
+a, ale może być różna w zależności od punktu startowego i zbieżności metody Newtona.
+
