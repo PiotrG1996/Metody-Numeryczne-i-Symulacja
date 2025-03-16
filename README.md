@@ -380,7 +380,7 @@ for root in roots:
     print(root)
 ```
 
-# Laboratorium 3: Analiza sygnałów zaszumionych
+# Laboratorium 3 - Analiza sygnałów zaszumionych
 
 ## Wprowadzenie
 
@@ -492,7 +492,7 @@ mean_error = mean_noise - mean_sine
 print(f"Błąd średniej arytmetycznej: {mean_error}")
 ```
 
-# Laboratorium 4: Rozwiązywanie równań nieliniowych
+# Laboratorium 4 - Rozwiązywanie równań nieliniowych
 
 
 ## 3.1 Metoda Bisekcji
@@ -809,7 +809,7 @@ Na wykresie widać, jak liczba iteracji zmienia się w zależności od liczby po
 a, ale może być różna w zależności od punktu startowego i zbieżności metody Newtona.
 
 
-# LAB 5
+# Laboratorium 5 - Interpolacja wielomianowa
 
 ### 1. Zaimplementowanie algorytmu interpolacji funkcji metodą Newtona
 
