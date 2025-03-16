@@ -1,22 +1,40 @@
-# Laboratorium
-## Rozwiązania zadań:
+# Laboratorium MNiS
+## Laboratorium 1 - Wprowadzenie w języku Python
 
 Ten dokument zawiera rozwiązania zadań przy użyciu Pythona i biblioteki NumPy. Każde zadanie jest wyjaśnione w komentarzach i zilustrowane przykładowym kodem.
 
 ### 1. Tworzenie katalogu
-Aby utworzyć katalog w Pythonie, użyj funkcji `os.mkdir()`.
+Aby utworzyć katalog w Pythonie, użyj funkcji os.mkdir(). Możesz również sprawdzić, czy katalog już istnieje, aby uniknąć błędów.
 
 ```python
 import os
-os.mkdir("nazwa_katalogu")  # Tworzy katalog o nazwie "nazwa_katalogu"
+
+# Tworzenie katalogu
+def create_directory(directory_name):
+    if not os.path.exists(directory_name):  # Sprawdza, czy katalog już istnieje
+        os.mkdir(directory_name)
+        print(f"Katalog '{directory_name}' został utworzony.")
+    else:
+        print(f"Katalog '{directory_name}' już istnieje.")
+
+create_directory("nazwa_katalogu")  # Tworzy katalog o nazwie "nazwa_katalogu"
 ```
 
 ### 2. Zmiana bieżącego katalogu
-Aby zmienić bieżący katalog roboczy, użyj funkcji `os.chdir()`.
-
+Aby zmienić bieżący katalog roboczy, użyj funkcji os.chdir(). Pamiętaj, że zmiana katalogu roboczego wpływa na wszystkie operacje wykonywane w skrypcie po jej zastosowaniu.
 ```python
 import os
-os.chdir("sciezka_do_katalogu")  # Zmienia bieżący katalog na "sciezka_do_katalogu"
+
+# Zmiana bieżącego katalogu
+def change_directory(path):
+    try:
+        os.chdir(path)  # Zmienia bieżący katalog na "path"
+        print(f"Zmieniono katalog roboczy na: {os.getcwd()}")  # Wyświetla aktualny katalog roboczy
+    except FileNotFoundError:
+        print(f"Ścieżka {path} nie istnieje.")
+
+change_directory("/path/to/directory")  # Przykład zmiany katalogu roboczego
+
 ```
 
 ### 3. Lista zawartości pustego katalogu
@@ -194,7 +212,7 @@ b = a.T  # Transponowanie macierzy
 print(b)
 ```
 
-# LAB 2
+# Laboratorium 2 - Układy równań
 ## 1. Tworzenie kopii macierzy `a`
 ```python
 import numpy as np
