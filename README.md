@@ -808,3 +808,186 @@ Na wykresie widać, jak liczba iteracji zmienia się w zależności od liczby po
 𝑎
 a, ale może być różna w zależności od punktu startowego i zbieżności metody Newtona.
 
+
+# LAB 5
+
+### 1. Zaimplementowanie algorytmu interpolacji funkcji metodą Newtona
+
+```python
+
+import numpy as np
+
+def newton_interpolation(x_points, y_points, x):
+    n = len(x_points)
+    # Obliczanie różnic dzielonych
+    divided_diff = np.zeros((n, n))
+    divided_diff[:, 0] = y_points
+
+    for j in range(1, n):
+        for i in range(n - j):
+            divided_diff[i, j] = (divided_diff[i + 1, j - 1] - divided_diff[i, j - 1]) / (x_points[i + j] - x_points[i])
+
+    # Obliczanie wartości wielomianu Newtona
+    result = divided_diff[0, 0]
+    for i in range(1, n):
+        term = divided_diff[0, i]
+        for j in range(i):
+            term *= (x - x_points[j])
+        result += term
+    return result
+
+# Przykładowe dane:
+x_points = [1, 2, 4.5, 5]
+y_points = [-10.5, -16.11, 11.8125, 27.5]
+
+# Obliczanie wartości funkcji w punkcie x = 3
+x_val = 3
+y_val = newton_interpolation(x_points, y_points, x_val)
+print(f"Interpolacja Newtona dla x = {x_val}: y = {y_val}")
+```
+
+### 2. Sprawdzenie działania algorytmu dla podanych danych (Wielomian 3-go stopnia)
+
+```python
+import matplotlib.pyplot as plt
+
+# Wykorzystanie wcześniej zaimplementowanej funkcji Newtona
+def plot_newton_interpolation(x_points, y_points, degree, x_vals):
+    n = len(x_points)
+    interpolated_values = [newton_interpolation(x_points, y_points, x) for x in x_vals]
+
+    plt.plot(x_vals, interpolated_values, label=f"Interpolacja Newtona (stopień {degree})", color="blue")
+    plt.scatter(x_points, y_points, color="red", label="Punkty danych")
+    plt.legend()
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.grid(True)
+    plt.title(f"Interpolacja Newtona (stopień {degree})")
+    plt.show()
+
+# Wartości do wykresu
+x_vals = np.linspace(min(x_points), max(x_points), 100)
+
+# Wykres
+plot_newton_interpolation(x_points, y_points, degree=3, x_vals=x_vals)
+```
+
+### 3. Obliczanie błędu interpolacji
+
+```python
+def interpolation_error(x_points, y_points, x_actual, x_val):
+    # Rzeczywista wartość funkcji
+    y_actual = np.interp(x_val, x_points, y_points)
+    
+    # Wartość funkcji interpolowanej
+    y_interpolated = newton_interpolation(x_points, y_points, x_val)
+    
+    # Błąd
+    return abs(y_actual - y_interpolated)
+
+# Obliczanie błędu interpolacji w punkcie x = 3
+error = interpolation_error(x_points, y_points, x_points, x_val)
+print(f"Błąd interpolacji w punkcie x = {x_val}: {error}")
+```
+
+### 4. Interpolacja funkcji za pomocą wielomianów stopni 2-4
+
+```python
+from numpy.polynomial.polynomial import Polynomial
+
+# Dane
+x_points_2 = [-2, 0, 1, 2.5, 4]
+y_points_2 = [-14, 9, 4, 9.625, 175]
+
+# Interpolacja dla stopnia 2, 3 i 4
+def polynomial_interpolation(x_points, y_points, degree):
+    p = Polynomial.fit(x_points, y_points, degree)
+    return p
+
+# Obliczanie błędów dla różnych stopni wielomianu
+errors = {}
+for degree in [2, 3, 4]:
+    p = polynomial_interpolation(x_points_2, y_points_2, degree)
+    error_values = [abs(p(x) - np.interp(x, x_points_2, y_points_2)) for x in x_points_2]
+    errors[degree] = (min(error_values), max(error_values))
+
+print(errors)
+
+# Wybór najlepszego wielomianu (z najmniejszym błędem)
+best_degree = min(errors, key=lambda k: errors[k][0])
+print(f"Najlepszy stopień wielomianu: {best_degree}")
+
+# Wykres najlepszego wielomianu
+p_best = polynomial_interpolation(x_points_2, y_points_2, best_degree)
+x_vals_2 = np.linspace(min(x_points_2), max(x_points_2), 100)
+y_vals_2 = p_best(x_vals_2)
+
+plt.plot(x_vals_2, y_vals_2, label=f"Wielomian {best_degree} stopnia")
+plt.scatter(x_points_2, y_points_2, color="red", label="Punkty danych")
+plt.legend()
+plt.xlabel("x")
+plt.ylabel("f(x)")
+plt.grid(True)
+plt.title(f"Interpolacja funkcji dla stopnia {best_degree}")
+plt.show()
+```
+
+### 5. Interpolacja prędkości rakiety
+```python
+# Dane
+t_points = [0, 10, 15, 20, 22.5, 30]
+v_points = [0, 227.4, 362.8, 517.35, 602.97, 901.67]
+
+# Interpolacja prędkości rakiety za pomocą wielomianu 3-go stopnia
+p_velocity = polynomial_interpolation(t_points, v_points, 3)
+
+# Obliczanie prędkości w t1=45s, t2=60s, t3=90s
+t_values = [45, 60, 90]
+v_values = [p_velocity(t) for t in t_values]
+
+print(f"Prędkość rakiety w t1=45s: {v_values[0]}")
+print(f"Prędkość rakiety w t2=60s: {v_values[1]}")
+print(f"Prędkość rakiety w t3=90s: {v_values[2]}")
+
+# Wykres
+t_vals = np.linspace(min(t_points), max(t_points), 100)
+v_vals = p_velocity(t_vals)
+
+plt.plot(t_vals, v_vals, label="Interpolacja prędkości rakiety")
+plt.scatter(t_points, v_points, color="red", label="Punkty danych")
+plt.legend()
+plt.xlabel("Czas (s)")
+plt.ylabel("Prędkość (m/s)")
+plt.grid(True)
+plt.title("Interpolacja prędkości rakiety")
+plt.show()
+```
+
+### 6. Interpolacja trajektorii ruchu robota
+```python
+# Dane
+x_robot = [72, 71, 60, 50, 35, 50]
+y_robot = [42.5, 52.5, 78.1, 92, 106, 120]
+
+# Interpolacja trajektorii za pomocą wielomianu 5-go stopnia (dowolny stopień)
+p_trajectory_x = polynomial_interpolation(range(len(x_robot)), x_robot, 5)
+p_trajectory_y = polynomial_interpolation(range(len(y_robot)), y_robot, 5)
+
+# Wykres
+x_vals_robot = np.linspace(0, len(x_robot)-1, 100)
+x_vals_interpolated = p_trajectory_x(x_vals_robot)
+y_vals_interpolated = p_trajectory_y(x_vals_robot)
+
+plt.plot(x_vals_interpolated, y_vals_interpolated, label="Interpolacja trajektorii")
+plt.plot([0, len(x_robot)-1], [80, 80], label="Granica obszaru roboczego", color="red", linestyle="--")
+plt.scatter(range(len(x_robot)), y_robot, color="green", label="Punkty danych")
+plt.legend()
+plt.xlabel("x [mm]")
+plt.ylabel("y [mm]")
+plt.title("Interpolacja trajektorii ruchu robota")
+plt.grid(True)
+plt.show()
+
+```
+
+
