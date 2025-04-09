@@ -1426,7 +1426,7 @@ print(f"Simpson    (n=1000)   = {simp_val:.5f}")
 print(f"Analitycznie          = {true_val1:.5f}")
 ```
 
-### 2. 
+### 2. Kwadratura Gaussa-Legendre’a
 
 ```python
 import numpy as np
