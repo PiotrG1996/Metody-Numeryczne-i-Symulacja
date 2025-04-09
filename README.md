@@ -1370,3 +1370,160 @@ plt.legend()
 plt.grid()
 plt.show()
 ```
+
+# Laboratorium 8 - Całkowanie numeryczne II
+
+### 1. Napisz skrypt umożliwiający obliczenie całki oznaczonej
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import simpson
+from math import log
+
+# 1. Funkcja podcałkowa
+def f1(x):
+    return 0.5 * x**2 + 2 * x
+
+# 2. Metoda Monte Carlo
+def monte_carlo_integral(f, a, b, n=100000):
+    """
+    f   - funkcja podcałkowa
+    a,b - granice całkowania
+    n   - liczba losowań
+    """
+    x_rand = np.random.uniform(a, b, n)
+    return (b - a) * np.mean(f(x_rand))
+
+# 3. Metoda Simpsona (z pomocą scipy)
+def simpson_integral(f, a, b, n=1000):
+    """
+    f   - funkcja podcałkowa
+    a,b - granice całkowania
+    n   - liczba podziałów przedziału
+    """
+    x_vals = np.linspace(a, b, n+1)
+    y_vals = f(x_vals)
+    return simpson(y_vals, x_vals)
+
+# ==== Parametry do Zadania 1 ====
+a1, b1 = 0, 3
+
+# Wartość analityczna
+# ∫ (0.5 x^2 + 2x) dx od 0 do 3
+# Pierwotna: (1/6)x^3 + x^2
+# Wartość: (1/6)*3^3 + (3)^2 = 4.5 + 9 = 13.5
+true_val1 = 13.5
+
+# ==== Obliczenia ====
+mc_val = monte_carlo_integral(f1, a1, b1, n=100000)
+simp_val = simpson_integral(f1, a1, b1, n=1000)
+
+# ==== Raport wyników ====
+print("=== Zadanie 1 ===")
+print(f"Monte Carlo (n=100000) = {mc_val:.5f}")
+print(f"Simpson    (n=1000)   = {simp_val:.5f}")
+print(f"Analitycznie          = {true_val1:.5f}")
+```
+
+### 2. 
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from numpy.polynomial.legendre import leggauss
+
+# 1. Funkcja podcałkowa
+def f2(x):
+    return x / (4 * x**2 + 1)
+
+# 2. Implementacja kwadratury Gaussa-Legendre'a
+def gauss_legendre(f, a, b, n):
+    """
+    f   - funkcja podcałkowa
+    a,b - granice całkowania
+    n   - liczba węzłów kwadratury
+    """
+    # Węzły i wagi dla kwadratury Gaussa-Legendre'a na [−1, 1]
+    xi, wi = leggauss(n)
+    # Przeskalowanie do [a, b]
+    #  x = 0.5*(b-a)*ξ + 0.5*(b+a)
+    # a także mnożnik przy sumie ~ 0.5*(b-a)
+    t = 0.5 * (b - a) * xi + 0.5 * (a + b)
+    return 0.5*(b - a) * np.sum(wi * f(t)), np.sum(wi)
+
+# ==== Parametry do Zadania 2 ====
+a2, b2 = 0, 2
+
+# Rozwiązanie analityczne
+true_val2 = np.log(17) / 8
+
+# ==== Analiza błędu dla n = 2..20 ====
+nodes_range = range(2, 21)
+errors = []
+weights_sum = []
+
+for n in nodes_range:
+    approx, w_sum = gauss_legendre(f2, a2, b2, n)
+    err = abs(approx - true_val2)
+    errors.append(err)
+    weights_sum.append(w_sum)
+
+# Wykres – Błąd vs. n
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,2,1)
+plt.plot(nodes_range, errors, 'o-', label='|c1 - c1,a|', color='orange')
+plt.title('Błąd Gaussa-Legendre’a')
+plt.xlabel('Liczba węzłów n')
+plt.ylabel('Błąd')
+plt.grid(True)
+plt.legend()
+
+# Wykres – Suma wag vs. n
+plt.subplot(1,2,2)
+plt.plot(nodes_range, weights_sum, 's--', label='Suma wag', color='green')
+plt.title('Suma wag kwadratury')
+plt.xlabel('Liczba węzłów n')
+plt.ylabel('Suma wag')
+plt.grid(True)
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+# ==== Raport wyników ====
+print("=== Zadanie 2 ===")
+print(f"Wartość analityczna c1,a = {true_val2:.5f}\n")
+for i, n in enumerate(nodes_range):
+    print(f"n = {n:<2d} | wartość = { (0.5*(b2 - a2)*(leggauss(n)[1] * f2(0.5*(b2 - a2)*leggauss(n)[0] + 0.5*(a2 + b2)) ).sum() ):.5f}, "
+          f"błąd = {errors[i]:.10f}, suma wag = {weights_sum[i]:.5f}")
+```
+
+# Interpretacja Wyników
+
+#### Zadanie 1
+
+- **Monte Carlo:**  
+  Z dużą liczbą punktów (np. n = 100000) metoda Monte Carlo daje przybliżenie **~13.47**, co jest bliskie wynikowi analitycznemu **13.5**. Różnica wynika głównie z elementu losowości.
+
+- **Simpson:**  
+  Przy zastosowaniu **n = 1000** podziałów metoda Simpsona daje wynik **13.5** – dokładnie zgodny z wartością obliczoną analitycznie.  
+  Funkcja podcałkowa jest nieskomplikowana (jest wielomianem), dzięki czemu metoda Simpsona osiąga praktycznie zerowy błąd przy wystarczająco dużej liczbie podziałów.
+
+#### Zadanie 2
+
+- **Kwadratura Gaussa-Legendre’a:**  
+  Obserwuje się, że błąd maleje bardzo szybko wraz ze wzrostem liczby węzłów.  
+  Dla standardowego przedziału \([-1,1]\) suma wag wynosi **2**, a przy przeskalowaniu do przedziału \([0,2]\) (przy użyciu współczynnika \(0.5(b-a)\)) uzyskujemy prawidłowy wynik całki.  
+  Czyste wagi uzyskane z funkcji `leggauss(n)` wciąż sumują się do 2 dla przedziału \([-1,1]\), co po odpowiednim przeskalowaniu daje właściwą wartość na \([0,2]\).
+
+- Wraz ze wzrostem liczby węzłów \( n \) można osiągnąć błąd rzędu \( 10^{-6} \) lub mniejszy, co oznacza bardzo dobrą dokładność metody.
+
+#### Uwagi Dodatkowe
+
+- **Dostosowanie dokładności:**  
+  Można lepiej dostroić dokładność wyników, zmieniając:
+  - Liczbę próbek w metodzie Monte Carlo.
+  - Liczbę podziałów w metodzie Simpsona.
+  - Liczbę węzłów w metodzie Gauss-Legendre’a.
