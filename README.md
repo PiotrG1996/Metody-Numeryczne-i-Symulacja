@@ -1302,5 +1302,71 @@ def romberg(a, b, f, max_iter=10):
             R[i, k] = (4**k * R[i, k-1] - R[i-1, k-1]) / (4**k - 1)
 
     return R[max_iter-1, max_iter-1]
+
+# Alternatywny sposób
+
+def q_romberg(a, b, func):
+    return romberg(func, a, b, show=False)
+
 ```
 
+### 7. Romberg na funkcji prostokątnej
+```python
+result_romberg = q_romberg(0, 2*T, lambda x: fsquare(np.array([x]), omega)[0])
+print("Całka funkcji prostokątnej [Romberg]:", result_romberg)
+```
+
+### 8. Funkcja impulsowa
+
+```python
+def fpulse(t, T=1, tau=0.2, N=50):
+    result = tau / T
+    for n in range(1, N+1):
+        coeff = (2 / (n * np.pi)) * np.sin(np.pi * n * tau / T)
+        result += coeff * np.cos(np.pi * n * t / T)
+    return result
+
+t = np.linspace(0, 2*T, 1000)
+pulse_vals = fpulse(t)
+
+# Całkowanie funkcji impulsowej
+integrated_romberg = np.array([q_romberg(0, ti, lambda x: fpulse(np.array([x]))[0]) for ti in t])
+integrated_rect = np.array([q_rect(0, ti, 100, lambda x: fpulse(np.array([x]))[0]) for ti in t])
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, pulse_vals, label="fpulse(t)", color='blue')
+plt.plot(t, integrated_romberg, label="Całka [Romberg]", linestyle='--')
+plt.plot(t, integrated_rect, label="Całka [prostokąty]", linestyle=':')
+plt.title("Funkcja impulsowa i całkowanie")
+plt.legend()
+plt.grid()
+plt.show()
+```
+
+### 9. Symulacja prędkości robota, droga, przyspieszenie
+
+```python
+# Przykładowy wykres prędkości – funkcja ciągła
+def velocity(t):
+    return np.piecewise(t,
+        [t < 2, (t >= 2) & (t < 4), t >= 4],
+        [lambda t: 0.5*t, lambda t: 1.0, lambda t: -0.5*t + 3])
+
+t = np.linspace(0, 6, 1000)
+v = velocity(t)
+
+# Droga = całka z prędkości
+s = np.array([q_trap(0, ti, 100, velocity) for ti in t])
+
+# Przyspieszenie = pochodna prędkości
+a = np.gradient(v, t)
+
+plt.figure(figsize=(10, 6))
+plt.plot(t, s, label="Droga [m]")
+plt.plot(t, v, label="Prędkość [m/s]")
+plt.plot(t, a, label="Przyspieszenie [m/s²]")
+plt.title("Symulacja ruchu robota")
+plt.legend()
+plt.grid()
+plt.show()
+```
