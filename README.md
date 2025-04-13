@@ -839,6 +839,7 @@ import numpy as np
 
 def newton_interpolation(x_points, y_points, x):
     n = len(x_points)
+    
     # Obliczanie różnic dzielonych
     divided_diff = np.zeros((n, n))
     divided_diff[:, 0] = y_points
@@ -852,18 +853,11 @@ def newton_interpolation(x_points, y_points, x):
     for i in range(1, n):
         term = divided_diff[0, i]
         for j in range(i):
-            term *= (x - x_points[j])
-        result += term
+            term = term * (x - x_points[j])
+        result = result + term
     return result
 
-# Przykładowe dane:
-x_points = [1, 2, 4.5, 5]
-y_points = [-10.5, -16.11, 11.8125, 27.5]
-
-# Obliczanie wartości funkcji w punkcie x = 3
-x_val = 3
-y_val = newton_interpolation(x_points, y_points, x_val)
-print(f"Interpolacja Newtona dla x = {x_val}: y = {y_val}")
+print(newton_interpolation([1, 2, 4.5, 5], [-10.5, -16, 11.8124, 27.5], 3))
 ```
 
 ### 2. Sprawdzenie działania algorytmu dla podanych danych (Wielomian 3-go stopnia)
@@ -895,15 +889,18 @@ plot_newton_interpolation(x_points, y_points, degree=3, x_vals=x_vals)
 ### 3. Obliczanie błędu interpolacji
 
 ```python
-def interpolation_error(x_points, y_points, x_actual, x_val):
+def interpolation_error(x_points, y_points, x):
     # Rzeczywista wartość funkcji
-    y_actual = np.interp(x_val, x_points, y_points)
+    y_actual = np.interp(x, x_points, y_points)
     
     # Wartość funkcji interpolowanej
-    y_interpolated = newton_interpolation(x_points, y_points, x_val)
+    y_interpolated = newton_interpolation(x_points, y_points, x)
     
     # Błąd
     return abs(y_actual - y_interpolated)
+
+print(interpolation_error([1, 2, 4.5, 5], [-10.5, -16, 11.8124, 27.5], 3))
+
 
 # Obliczanie błędu interpolacji w punkcie x = 3
 error = interpolation_error(x_points, y_points, x_points, x_val)
@@ -954,27 +951,52 @@ plt.show()
 
 ### 5. Interpolacja prędkości rakiety
 ```python
-# Dane
+
+
 t_points = [0, 10, 15, 20, 22.5, 30]
 v_points = [0, 227.4, 362.8, 517.35, 602.97, 901.67]
 
-# Interpolacja prędkości rakiety za pomocą wielomianu 3-go stopnia
-p_velocity = polynomial_interpolation(t_points, v_points, 3)
+# Values to compute
+t_values = np.linspace(min(t_points), max(t_points), 100)
 
-# Obliczanie prędkości w t1=45s, t2=60s, t3=90s
-t_values = [45, 60, 90]
-v_values = [p_velocity(t) for t in t_values]
+# Calculate interpolated values for each t
+v_values = [newton_interpolation(t_points, v_points, t) for t in t_values]
 
-print(f"Prędkość rakiety w t1=45s: {v_values[0]}")
-print(f"Prędkość rakiety w t2=60s: {v_values[1]}")
-print(f"Prędkość rakiety w t3=90s: {v_values[2]}")
+target_times = [45, 60, 90]
 
-# Wykres
-t_vals = np.linspace(min(t_points), max(t_points), 100)
-v_vals = p_velocity(t_vals)
+for t in target_times:
+    v = newton_interpolation(t_points, v_points, t)
+    print(f"Prędkość rakiety w t={t}s: {v:.2f} m/s")
+    
 
-plt.plot(t_vals, v_vals, label="Interpolacja prędkości rakiety")
-plt.scatter(t_points, v_points, color="red", label="Punkty danych")
+plt.plot(t_values, v_values, label="Interpolacja Newtona")
+plt.scatter(t_points, v_points, color="red", label="Dane pomiarowe")
+plt.legend()
+plt.xlabel("Czas (s)")
+plt.ylabel("Prędkość (m/s)")
+plt.grid(True)
+plt.title("Interpolacja prędkości rakiety")
+plt.show()
+
+
+t_points = [0, 10, 15, 20, 22.5, 30]
+v_points = [0, 227.4, 362.8, 517.35, 602.97, 901.67]
+
+# Values to compute
+t_values = np.linspace(min(t_points), max(t_points), 100)
+
+# Calculate interpolated values for each t
+v_values = [newton_interpolation(t_points, v_points, t) for t in t_values]
+
+target_times = [45, 60, 90]
+
+for t in target_times:
+    v = newton_interpolation(t_points, v_points, t)
+    print(f"Prędkość rakiety w t={t}s: {v:.2f} m/s")
+    
+
+plt.plot(t_values, v_values, label="Interpolacja Newtona")
+plt.scatter(t_points, v_points, color="red", label="Dane pomiarowe")
 plt.legend()
 plt.xlabel("Czas (s)")
 plt.ylabel("Prędkość (m/s)")
