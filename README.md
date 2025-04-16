@@ -1549,3 +1549,197 @@ for i, n in enumerate(nodes_range):
   - Liczbę próbek w metodzie Monte Carlo.
   - Liczbę podziałów w metodzie Simpsona.
   - Liczbę węzłów w metodzie Gauss-Legendre’a.
+
+# Laboratorium 9
+
+## V1
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parametry układu
+m1 = 1.0      # masa 1
+m2 = 1.0      # masa 2
+k1 = 10.0     # sztywność sprężyny 1
+k2 = 15.0     # sztywność sprężyny 2
+b1 = 0.5      # tłumienie dla masy 1
+b2 = 0.5      # tłumienie dla masy 2
+
+# Warunki początkowe: [x1, v1, x2, v2]
+initial_state = np.array([1.0, 0.0, -1.0, 0.0])
+
+# Funkcja obliczająca pochodne
+def derivatives(t, state):
+    x1, v1, x2, v2 = state
+    a1 = (-k1 * x1 - k2 * (x1 - x2) - b1 * v1) / m1
+    a2 = (-k2 * (x2 - x1) - b2 * v2) / m2
+    return np.array([v1, a1, v2, a2])
+
+# Metoda Rungego-Kutty 4 rzędu
+def runge_kutta_4(state, t, dt):
+    k1 = derivatives(t, state)
+    k2 = derivatives(t + dt / 2, state + dt / 2 * k1)
+    k3 = derivatives(t + dt / 2, state + dt / 2 * k2)
+    k4 = derivatives(t + dt, state + dt * k3)
+    return state + (dt / 6) * (k1 + 2*k2 + 2*k3 + k4)
+
+# Parametry symulacji
+t_max = 20.0
+dt = 0.01
+time = np.arange(0, t_max, dt)
+
+# Inicjalizacja tablicy na wyniki
+states = np.zeros((len(time), 4))
+states[0] = initial_state
+
+# Pętla symulacyjna
+for i in range(1, len(time)):
+    states[i] = runge_kutta_4(states[i - 1], time[i - 1], dt)
+
+# Wykresy pozycji mas w funkcji czasu
+plt.figure(figsize=(10, 6))
+plt.plot(time, states[:, 0], label="Pozycja masy 1 (x1)")
+plt.plot(time, states[:, 2], label="Pozycja masy 2 (x2)")
+plt.xlabel("Czas [s]")
+plt.ylabel("Pozycja [m]")
+plt.title("Ruch dwóch mas połączonych sprężynami (Metoda RK4)")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("symulacja_mas.pdf")  # Zapis wykresu do pliku PDF
+plt.show()
+
+```
+
+### V2
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Parametry układu
+m1 = 1.0      # masa 1
+m2 = 1.0      # masa 2
+k1 = 10.0     # sztywność sprężyny 1
+k2 = 15.0     # sztywność sprężyny 2
+b1 = 0.5      # tłumienie dla masy 1
+b2 = 0.5      # tłumienie dla masy 2
+
+# Warunki początkowe: [x1, v1, x2, v2]
+initial_state = np.array([1.0, 0.0, -1.0, 0.0])
+
+# Definicja pochodnych
+def derivatives(t, state):
+    x1, v1, x2, v2 = state
+    a1 = (-k1 * x1 - k2 * (x1 - x2) - b1 * v1) / m1
+    a2 = (-k2 * (x2 - x1) - b2 * v2) / m2
+    return np.array([v1, a1, v2, a2])
+
+# Metoda RK4
+def runge_kutta_4(state, t, dt):
+    k1 = derivatives(t, state)
+    k2 = derivatives(t + dt / 2, state + dt / 2 * k1)
+    k3 = derivatives(t + dt / 2, state + dt / 2 * k2)
+    k4 = derivatives(t + dt, state + dt * k3)
+    return state + (dt / 6) * (k1 + 2*k2 + 2*k3 + k4)
+
+# Parametry symulacji
+t_max = 20.0
+dt = 0.01
+time = np.arange(0, t_max, dt)
+
+# Inicjalizacja wyników
+states = np.zeros((len(time), 4))
+states[0] = initial_state
+
+# Pętla symulacji
+for i in range(1, len(time)):
+    states[i] = runge_kutta_4(states[i - 1], time[i - 1], dt)
+
+# Wykresy
+plt.figure(figsize=(10, 6))
+plt.plot(time, states[:, 0], label="Pozycja masy 1 (x1)")
+plt.plot(time, states[:, 2], label="Pozycja masy 2 (x2)")
+plt.xlabel("Czas [s]")
+plt.ylabel("Pozycja [m]")
+plt.title("Ruch dwóch mas połączonych sprężynami (Metoda RK4)")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+### Laboratorium 10 - Wachadło
+
+```python
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Parametry wahadla
+g = 9.81    # przyspieszenie ziemskie [m/s^2]
+l = 1.0     # dlugosc wahadla [m]
+A = 1.2     # amplituda sily wymuszajacej
+omega_D = 2/3  # czestotliwosc sily wymuszajacej
+gamma = 0.1    # wspolczynnik tlumienia
+
+# Warunki poczatkowe
+theta_0 = 0.2  # poczatkowy kat wychylenia [rad]
+omega_0 = 0.0  # poczatkowa predkosc katowa [rad/s]
+
+# Parametry symulacji
+dt = 0.01      # krok czasowy [s]
+t_max = 60     # czas symulacji [s]
+t = np.arange(0, t_max, dt)
+
+# Funkcja opisujaca uklad def (theta, omega)
+def derivatives(state, time):
+    theta, omega = state
+    dtheta_dt = omega
+    domega_dt = -gamma * omega - (g / l) * np.sin(theta) + A * np.cos(omega_D * time)
+    return np.array([dtheta_dt, domega_dt])
+
+# Metoda Rungego-Kutty 4 rzedu
+def runge_kutta_4(state, time, dt):
+    k1 = derivatives(state, time)
+    k2 = derivatives(state + 0.5 * dt * k1, time + 0.5 * dt)
+    k3 = derivatives(state + 0.5 * dt * k2, time + 0.5 * dt)
+    k4 = derivatives(state + dt * k3, time + dt)
+    return state + (dt / 6) * (k1 + 2*k2 + 2*k3 + k4)
+
+# Symulacja
+states = np.zeros((len(t), 2))
+states[0] = [theta_0, omega_0]
+
+for i in range(1, len(t)):
+    states[i] = runge_kutta_4(states[i-1], t[i-1], dt)
+
+# Wykres ruchu wahadla w funkcji czasu
+plt.figure(figsize=(10, 6))
+plt.plot(t, states[:, 0], label='Kat wychylenia θ(t)')
+plt.xlabel('Czas [s]')
+plt.ylabel('Kat wychylenia [rad]')
+plt.title('Ruch wahadla z wymuszeniem (RK4)')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Animacja ruchu wahadla
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlim(-1.2*l, 1.2*l)
+ax.set_ylim(-1.2*l, 1.2*l)
+line, = ax.plot([], [], 'o-', lw=2)
+
+# Aktualizacja pozycji w animacji
+def update(frame):
+    theta = states[frame, 0]
+    x = l * np.sin(theta)
+    y = -l * np.cos(theta)
+    line.set_data([0, x], [0, y])
+    return line,
+
+ani = FuncAnimation(fig, update, frames=len(t), blit=True, interval=dt*1000)
+plt.show()
+```
