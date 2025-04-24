@@ -1557,6 +1557,7 @@ for i, n in enumerate(nodes_range):
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 # Parametry układu
 m1 = 1.0      # masa 1
@@ -1597,18 +1598,61 @@ states[0] = initial_state
 for i in range(1, len(time)):
     states[i] = runge_kutta_4(states[i - 1], time[i - 1], dt)
 
-# Wykresy pozycji mas w funkcji czasu
-plt.figure(figsize=(10, 6))
-plt.plot(time, states[:, 0], label="Pozycja masy 1 (x1)")
-plt.plot(time, states[:, 2], label="Pozycja masy 2 (x2)")
-plt.xlabel("Czas [s]")
-plt.ylabel("Pozycja [m]")
-plt.title("Ruch dwóch mas połączonych sprężynami (Metoda RK4)")
-plt.legend()
-plt.grid(True)
+x1_vals = states[:, 0]
+x2_vals = states[:, 2]
+
+# Konfiguracja animacji
+fig, ax = plt.subplots(figsize=(10, 3))
+ax.set_xlim(-3, 3)
+ax.set_ylim(-1, 1)
+ax.set_title("Animacja ruchu mas i sprężyn")
+ax.set_xlabel("Pozycja [m]")
+
+mas1, = ax.plot([], [], 'ro', markersize=12, label='Masa 1')
+mas2, = ax.plot([], [], 'bo', markersize=12, label='Masa 2')
+spring1, = ax.plot([], [], 'k-', lw=2)
+spring2, = ax.plot([], [], 'k-', lw=2)
+wall1 = ax.plot([-3, -3], [-0.5, 0.5], 'grey', lw=4)
+ax.legend()
+
+# Funkcja aktualizująca animację
+def init():
+    mas1.set_data([], [])
+    mas2.set_data([], [])
+    spring1.set_data([], [])
+    spring2.set_data([], [])
+    return mas1, mas2, spring1, spring2
+
+def update(frame):
+    x1 = x1_vals[frame]
+    x2 = x2_vals[frame]
+
+    # Pozycje mas
+    mas1.set_data([x1], [0])
+    mas2.set_data([x2], [0])
+
+    # Sprężyny: wall -> mass1 -> mass2
+    spring1.set_data([-3, x1], [0, 0])
+    spring2.set_data([x1, x2], [0, 0])
+    return mas1, mas2, spring1, spring2
+
+anim = FuncAnimation(fig, update, frames=len(time), init_func=init,
+                     interval=10, blit=True)
 plt.tight_layout()
-plt.savefig("symulacja_mas.pdf")  # Zapis wykresu do pliku PDF
+
+# Wykresy pozycji mas w funkcji czasu
+# plt.figure(figsize=(10, 6))
+# plt.plot(time, states[:, 0], label="Pozycja masy 1 (x1)")
+# plt.plot(time, states[:, 2], label="Pozycja masy 2 (x2)")
+# plt.xlabel("Czas [s]")
+# plt.ylabel("Pozycja [m]")
+# plt.title("Ruch dwóch mas połączonych sprężynami (Metoda RK4)")
+# plt.legend()
+# plt.grid(True)
+# plt.tight_layout()
+# plt.savefig("symulacja_mas.pdf")  # Zapis wykresu do pliku PDF
 plt.show()
+
 
 ```
 
