@@ -1,0 +1,25 @@
+[
+  {
+    "question": "Jak rozwiązać układ równań liniowych w Pythonie przy użyciu NumPy?",
+    "options": {
+      "a": "Używając np.linalg.inv()",
+      "b": "Używając np.linalg.solve()",
+      "c": "Używając np.linalg.det()",
+      "d": "Używając np.linalg.eig()"
+    },
+    "correct": "b",
+    "explanation": "Aby rozwiązać układ równań liniowych w Pythonie, używamy funkcji np.linalg.solve(), która bierze jako argumenty macierz współczynników i wektor wyników."
+  },
+  {
+    "question": "Jaki jest wynik rozwiązania układu równań:\n2x - 3y + z = 1\n4x + y - 2z = -2\n-3x + 2y + 3z = 3",
+    "options": {
+      "a": "x = 1.0, y = -1.0, z = 2.0",
+      "b": "x = 0.0, y = 1.0, z = -1.0",
+      "c": "x = 2.0, y = -2.0, z = 1.0",
+      "d": "x = -1.0, y = 2.0, z = 0.0"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[2, -3, 1], [4, 1, -2], [-3, 2, 3]])\nb = np.array([1, -2, 3])\nx = np.linalg.solve(A, b)\nprint(x)",
+    "explanation": "Po rozwiązaniu układu równań, wartości zmiennych x, y, z to: x = 1.0, y = -1.0, z = 2.0."
+  }
+]

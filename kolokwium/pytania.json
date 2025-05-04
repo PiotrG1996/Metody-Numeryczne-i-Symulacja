@@ -1,0 +1,92 @@
+[
+  {
+    "question": "Które polecenie usuwa zmienne z pamięci?",
+    "options": {
+      "a": "clc",
+      "b": "clear",
+      "c": "del",
+      "d": "remove"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Jak wyczyścić konsolę w Pythonie?",
+    "options": {
+      "a": "os.clear()",
+      "b": "os.system('cls')",
+      "c": "console.reset()",
+      "d": "clean()"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Które polecenie wyświetla nazwy zmiennych w pamięci?",
+    "options": {
+      "a": "globals()",
+      "b": "vars()",
+      "c": "locals()",
+      "d": "print(globals())"
+    },
+    "correct": "a"
+  },
+  {
+    "question": "Która funkcja generuje macierz jednostkową 5x5?",
+    "options": {
+      "a": "np.ones(5)",
+      "b": "np.eye(5)",
+      "c": "np.identity(5)",
+      "d": "np.unit(5)"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Jak utworzyć macierz zerową 3x3 w NumPy?",
+    "options": {
+      "a": "np.zeros(3, 3)",
+      "b": "np.zeros((3, 3))",
+      "c": "np.empty(3x3)",
+      "d": "np.matrix.zeros(3)"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Które polecenie generuje macierz diagonalną z wartościami [1, 2, 3]?",
+    "options": {
+      "a": "np.diag([1, 2, 3])",
+      "b": "np.diagonal(1, 2, 3)",
+      "c": "np.matrix.diag(1, 2, 3)",
+      "d": "np.fill_diagonal([1, 2, 3])"
+    },
+    "correct": "a"
+  },
+  {
+    "question": "Jak wybrać drugą kolumnę macierzy a w NumPy?",
+    "options": {
+      "a": "a[2, :]",
+      "b": "a[:, 2]",
+      "c": "a[2]",
+      "d": "a(: , 2)"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Które polecenie łączy macierze a i b poziomo?",
+    "options": {
+      "a": "np.concatenate(a, b)",
+      "b": "np.hstack((a, b))",
+      "c": "np.vstack((a, b))",
+      "d": "np.join(a, b)"
+    },
+    "correct": "b"
+  },
+  {
+    "question": "Jak transponować macierz a w NumPy?",
+    "options": {
+      "a": "a.transpose()",
+      "b": "a.T",
+      "c": "np.transpose(a)",
+      "d": "Wszystkie powyższe"
+    },
+    "correct": "d"
+  }
+]
