@@ -374,7 +374,7 @@ else:
     print(f"Complex solutions: x1 = {real_part} + {imaginary_part}i, x2 = {real_part} - {imaginary_part}i")
 ```
 
-### 17.
+### 17. Rozwiązywanie układu równań liniowych za pomocą reguły Cramera
 ```python
 import numpy as np
 
@@ -398,7 +398,7 @@ else:
     print("No unique solution exists (determinant is zero).")
 ```
 
-### 18.
+### 18. Rozwiązywanie równań sześciennych za pomocą funkcji **numpy.roots**
 ```python
 import numpy as np
 
@@ -519,6 +519,7 @@ plt.hist(errors, bins=30, edgecolor='black')
 plt.title('Rozkład błędów wokół wartości średniej')
 plt.xlabel('Błąd')
 plt.ylabel('Liczba próbek')
+plt.grid(True)
 plt.show()
 ```
 
@@ -665,6 +666,7 @@ Aby znaleźć pierwiastki w przedziale [-3, 3], wystarczy zmienić przedziały n
 ```python
 a, b = -3, 3
 root, iterations = bisection_method(f, a, b, delta)
+```
 
 # 3.2 Metoda Newtona
 ### 1: Implementacja algorytmu obliczania pierwiastka trzeciego stopnia
