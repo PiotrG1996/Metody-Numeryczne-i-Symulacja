@@ -18,7 +18,7 @@ EMAIL_PASS = os.getenv("EMAIL_PASS")
 
 # === Konfiguracja aplikacji ===
 st.set_page_config(page_title="Zaliczenie", layout="centered")
-st.title("🧪 Zaliczenie - Metody Numeryczne i Symulacja")
+st.title("🧪 Termin 0 - Laboratorium MNiS")
 
 # === PANEL BOCZNY: Wczytywanie pytań i danych użytkownika ===
 st.sidebar.header("📁 Wczytaj pytania")

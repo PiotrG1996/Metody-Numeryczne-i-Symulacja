@@ -44,11 +44,12 @@ Funkcja `os.listdir()` zwraca zawartość katalogu. Jeśli katalog jest pusty, z
 
 ```python
 import os
+
 print(os.listdir())  # Wynik: [] (pusta lista)
 ```
 
 ### 4. Zapisywanie i wczytywanie zmiennych
-Aby zapisać zmienne do pliku i je ponownie wczytać, użyj `numpy.save()` i `numpy.load()`.
+Aby zapisać zmienne do pliku i je ponownie wczytać, użyj `numpy.save()` i `numpy.load()`. 
 
 ```python
 import numpy as np
@@ -68,20 +69,38 @@ Aby usunąć zmienną z pamięci, użyj `del`.
 Aby wyczyścić konsolę, użyj `os.system()`.
 
 ```python
-a = 10
-del a  # Usuwa zmienną 'a' z pamięci
+# Usuwanie zmiennej z pamięci
+x = 42
+print(f"Przed usunięciem: x = {x}")
+del x  # Usuwa zmienną 'x' z pamięci
 
+try:
+    print(x)  # Próba dostępu do usuniętej zmiennej spowoduje błąd
+except NameError:
+    print("Zmienna 'x' została usunięta z pamięci.")
+
+# Czyszczenie konsoli
 import os
-os.system('cls' if os.name == 'nt' else 'clear')  # Czyści konsolę
+
+# Funkcja do czyszczenia konsoli
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+print("Konsola zostanie wyczyszczona...")
+clear_console()
 ```
 
 ### 6. Wyświetlanie nazw zmiennych w pamięci
 Aby wyświetlić wszystkie nazwy zmiennych w pamięci, użyj funkcji `globals()`.
 
 ```python
-a = 10
-b = 20
-print([var for var in globals() if not var.startswith("__")])  # Wynik: ['a', 'b']
+# Definiowanie zmiennych
+x = 5
+y = 15
+z = 25
+
+# Wyświetlanie nazw zmiennych globalnych
+print([var for var in globals() if var in ['x', 'y', 'z']])  
 ```
 
 ### 7. Określanie rozmiaru zmiennej
@@ -89,6 +108,7 @@ Aby określić rozmiar tablicy NumPy, użyj atrybutu `.shape`.
 
 ```python
 import numpy as np
+# Tworzenie tablicy NumPy
 a = np.array([[1, 2, 3], [4, 5, 6]])
 print(a.shape)  # Wynik: (2, 3)
 ```

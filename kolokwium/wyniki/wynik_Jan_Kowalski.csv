@@ -1,0 +1,14 @@
+Pytanie,Twoja odpowiedź,Poprawna odpowiedź,Wynik
+Jak rozwiązać układ równań liniowych w Pythonie przy użyciu NumPy?,b,b,Poprawnie
+"Jaki jest wynik rozwiązania układu równań:
+2x - 3y + z = 1
+4x + y - 2z = -2
+-3x + 2y + 3z = 3",a,a,Poprawnie
+Która metoda całkowania numerycznego wykorzystuje wielomian stopnia 0 do przybliżenia funkcji podcałkowej?,a,b,Błędnie
+"Jak nazywa się metoda całkowania numerycznego, która dzieli przedział całkowania na podprzedziały i sumuje przybliżenia na każdym z nich?",a,a,Poprawnie
+Która z poniższych nazw jest alternatywną nazwą metody prostokątów?,a,a,Poprawnie
+W jaki sposób można zwiększyć dokładność metody trapezów?,a,b,Błędnie
+Który wzór przedstawia metodę trapezów?,a,b,Błędnie
+Metoda trapezów wykorzystuje do przybliżenia funkcji podcałkowej wielomian stopnia:,a,b,Błędnie
+Kiedy metoda prostokątów daje dobre przybliżenie wartości całki?,a,b,Błędnie
+"W jakim zastosowaniu, według tekstu, konieczne jest implementowanie numerycznego całkowania?",a,c,Błędnie

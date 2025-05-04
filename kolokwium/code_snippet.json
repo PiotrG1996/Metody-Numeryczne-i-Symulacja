@@ -21,5 +21,93 @@
     "correct": "a",
     "code": "import numpy as np\nA = np.array([[2, -3, 1], [4, 1, -2], [-3, 2, 3]])\nb = np.array([1, -2, 3])\nx = np.linalg.solve(A, b)\nprint(x)",
     "explanation": "Po rozwiązaniu układu równań, wartości zmiennych x, y, z to: x = 1.0, y = -1.0, z = 2.0."
+  },
+  {
+    "question": "Która metoda całkowania numerycznego wykorzystuje wielomian stopnia 0 do przybliżenia funkcji podcałkowej?",
+    "options": {
+      "a": "Metoda trapezów",
+      "b": "Metoda prostokątów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów przybliża funkcję podcałkową za pomocą funkcji stałej (wielomian stopnia 0), wykorzystując wartość funkcji w środku przedziału."
+  },
+  {
+    "question": "Jak nazywa się metoda całkowania numerycznego, która dzieli przedział całkowania na podprzedziały i sumuje przybliżenia na każdym z nich?",
+    "options": {
+      "a": "Metoda iteracyjna",
+      "b": "Metoda Gaussa",
+      "c": "Metoda Romberga",
+      "d": "Metoda Newtona"
+    },
+    "correct": "a",
+    "explanation": "Iteracyjna metoda trapezów polega na podziale przedziału całkowania na n podprzedziałów, obliczeniu przybliżeń na każdym z nich za pomocą wzoru trapezów i zsumowaniu wyników."
+  },
+  {
+    "question": "Która z poniższych nazw jest alternatywną nazwą metody prostokątów?",
+    "options": {
+      "a": "Metoda punktu środkowego",
+      "b": "Metoda średniej wartości",
+      "c": "Metoda stycznych",
+      "d": "Metoda Newtona-Cotesa"
+    },
+    "correct": "a",
+    "explanation": "Metoda prostokątów jest również nazywana metodą punktu środkowego, gdyż wykorzystuje wartość funkcji w środku przedziału do przybliżenia całki."
+  },
+  {
+    "question": "W jaki sposób można zwiększyć dokładność metody trapezów?",
+    "options": {
+      "a": "Zmniejszając liczbę podprzedziałów",
+      "b": "Zwiększając liczbę podprzedziałów",
+      "c": "Używając wyższych stopni wielomianów",
+      "d": "Całkując analitycznie"
+    },
+    "correct": "b",
+    "explanation": "Dokładność metody trapezów można zwiększyć poprzez podział przedziału całkowania na większą liczbę podprzedziałów (zwiększenie n), co pozwala lepiej przybliżyć funkcję podcałkową."
+  },
+  {
+    "question": "Który wzór przedstawia metodę trapezów?",
+    "options": {
+      "a": "(b - a) * f((a + b)/2)",
+      "b": "(b - a) * (f(a) + f(b)) / 2",
+      "c": "h * sum_{i=1}^n f(x_i)",
+      "d": "(h/3) * (f(a) + 4f((a+b)/2) + f(b))"
+    },
+    "correct": "b",
+    "explanation": "Metoda trapezów wykorzystuje wzór (b - a) * (f(a) + f(b)) / 2, który przybliża całkę jako pole trapezu."
+  },
+  {
+    "question": "Metoda trapezów wykorzystuje do przybliżenia funkcji podcałkowej wielomian stopnia:",
+    "options": {
+      "a": "0",
+      "b": "1",
+      "c": "2",
+      "d": "3"
+    },
+    "correct": "b",
+    "explanation": "Metoda trapezów przybliża funkcję podcałkową za pomocą funkcji liniowej, czyli wielomianu stopnia pierwszego."
+  },
+  {
+    "question": "Kiedy metoda prostokątów daje dobre przybliżenie wartości całki?",
+    "options": {
+      "a": "Gdy funkcja silnie oscyluje",
+      "b": "Gdy funkcja zmienia się nieznacznie w przedziale całkowania",
+      "c": "Gdy funkcja jest wielomianem wysokiego stopnia",
+      "d": "Gdy przedział całkowania jest bardzo duży"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów zapewnia dobre wyniki, gdy funkcja podcałkowa zmienia się w niewielkim stopniu w przedziale (a, b), ponieważ przybliżenie stałą funkcją jest wtedy bardziej dokładne."
+  },
+  {
+    "question": "W jakim zastosowaniu, według tekstu, konieczne jest implementowanie numerycznego całkowania?",
+    "options": {
+      "a": "Obliczanie równań różniczkowych",
+      "b": "Symulacje Monte Carlo",
+      "c": "Systemy sterowania z regulatorem PID",
+      "d": "Optymalizacja funkcji"
+    },
+    "correct": "c",
+    "explanation": "W systemach sterowania, np. z regulatorem PID, konieczne jest numeryczne całkowanie sygnału dyskretnego w celu realizacji członu całkującego."
   }
 ]
