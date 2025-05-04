@@ -1,0 +1,10 @@
+Pytanie,Odpowiedź,Poprawna,Wynik
+Które polecenie usuwa zmienne z pamięci?,,b,❌
+Jak wyczyścić konsolę w Pythonie?,,b,❌
+Które polecenie wyświetla nazwy zmiennych w pamięci?,,a,❌
+Która funkcja generuje macierz jednostkową 5x5?,,b,❌
+Jak utworzyć macierz zerową 3x3 w NumPy?,,b,❌
+"Które polecenie generuje macierz diagonalną z wartościami [1, 2, 3]?",,a,❌
+Jak wybrać drugą kolumnę macierzy a w NumPy?,,b,❌
+Które polecenie łączy macierze a i b poziomo?,,b,❌
+Jak transponować macierz a w NumPy?,,d,❌

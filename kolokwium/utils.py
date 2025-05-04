@@ -43,29 +43,27 @@ def get_answer_text(answer_key: str, options: Dict[str, str], default: str = "Br
     return options.get(answer_key, default)
 
 
-def evaluate_answers(questions, user_answers):
-    results = []
-    score = 0
+def evaluate_answers(questions: List[Dict], user_answers: Dict) -> Dict:
+    results = {
+        "score": 0,
+        "results": []
+    }
     
     for idx, question in enumerate(questions):
-        user_answer = user_answers.get(str(idx))
-        is_correct = (user_answer == question["correct"])
+        user_answer = user_answers.get(str(idx), "").lower()  # Pobierz jako string
+        correct_answer = question["correct"].lower()
+        is_correct = user_answer == correct_answer
         
         if is_correct:
-            score += 1
+            results["score"] += 1
             
-        results.append({
-            "question": question["question"],
+        results["results"].append({
+            "question_id": idx,
             "user_answer": user_answer,
-            "correct_answer": question["correct"],
             "is_correct": is_correct
         })
     
-    return {
-        "score": score,
-        "total": len(questions),
-        "results": results
-    }
+    return results
     
 def sanitize_filename(name):
     if not name:    
