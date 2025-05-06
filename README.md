@@ -1293,7 +1293,7 @@ print(f"Całka funkcji prostokątnej (prostokąty) = {result_square_wave_rect}")
 print(f"Całka funkcji prostokątnej (trapezy) = {result_square_wave_trap}")
 ```
 
-### 5. 
+### 5. Całkowanie funkcji prostokątnej
 
 ```python
 import matplotlib.pyplot as plt
@@ -1360,6 +1360,53 @@ result_romberg = q_romberg(0, 2*T, lambda x: fsquare(np.array([x]), omega)[0])
 print("Całka funkcji prostokątnej [Romberg]:", result_romberg)
 ```
 
+```python
+# Alternatywnie
+import numpy as np
+
+# Definicja funkcji prostokątnej
+def fsquare(x, omega):
+    """
+    Funkcja prostokątna f(x) = 1, dla |x| <= omega, 0 w przeciwnym razie
+    """
+    return np.where(np.abs(x) <= omega, 1, 0)
+
+# Funkcja Romberga
+def q_romberg(a, b, f, n_max=10):
+    """
+    Oblicza całkę za pomocą metody Romberga.
+    a, b  - granice całkowania
+    f     - funkcja podcałkowa
+    n_max - maksymalna liczba iteracji
+    """
+    R = np.zeros((n_max, n_max))  # Macierz Romberga
+    
+    # Początkowe wartości przybliżeń
+    R[0, 0] = (b - a) * 0.5 * (f(a) + f(b))
+    
+    # Iteracje Romberga
+    for i in range(1, n_max):
+        h = (b - a) / 2**i
+        sum_f = 0.0
+        for k in range(1, 2**(i-1) + 1):
+            sum_f += f(a + (2*k - 1) * h)
+        R[i, 0] = 0.5 * (R[i-1, 0] + h * sum_f)
+        
+        # Poprawki Romberga
+        for j in range(1, i + 1):
+            R[i, j] = R[i, j-1] + (R[i, j-1] - R[i-1, j-1]) / (4**j - 1)
+    
+    return R[n_max-1, n_max-1]
+
+# Parametry do zadania
+omega = 1.0  # Zakres funkcji prostokątnej
+T = 1.0      # Zakres całkowania
+
+# Obliczenia
+result_romberg = q_romberg(0, 2*T, lambda x: fsquare(np.array([x]), omega)[0])
+print("Całka funkcji prostokątnej [Romberg]:", result_romberg)
+```
+
 ### 8. Funkcja impulsowa
 
 ```python
@@ -1417,7 +1464,9 @@ plt.show()
 
 # Laboratorium 8 - Całkowanie numeryczne II
 
-### 1. Napisz skrypt umożliwiający obliczenie całki oznaczonej
+W tym zadaniu obliczymy całkę oznaczoną z funkcji \( f(x) = 0.5 x^2 + 2x \) na przedziale \( [0, 3] \) za pomocą dwóch metod: **Monte Carlo** oraz **metody Simpsona**. Dodatkowo porównamy obliczone wartości z wartością analityczną całki.
+
+### 1. Skrypt umożliwiający obliczenie całki oznaczonej
 
 ```python
 import numpy as np
@@ -1470,7 +1519,9 @@ print(f"Simpson    (n=1000)   = {simp_val:.5f}")
 print(f"Analitycznie          = {true_val1:.5f}")
 ```
 
-### 2. Kwadratura Gaussa-Legendre’a
+### 2. Kwadratura Gaussa-Legendre'a
+
+Kwadratura Gaussa-Legendre'a jest jedną z najpopularniejszych metod numerycznych służących do obliczania całek. Jest szczególnie efektywna w przypadku całkowania funkcji, które są dobrze odwzorowane przez wielomiany. Jej zaletą jest to, że można uzyskać dokładne wyniki przy stosunkowo małej liczbie węzłów.
 
 ```python
 import numpy as np
@@ -1572,9 +1623,11 @@ for i, n in enumerate(nodes_range):
   - Liczbę podziałów w metodzie Simpsona.
   - Liczbę węzłów w metodzie Gauss-Legendre’a.
 
-# Laboratorium 9
+# Laboratorium 9 
 
-## V1
+## Symulacja ruchu dwóch mas połączonych sprężynami
+
+W tym laboratorium wykonujemy symulację układu składającego się z dwóch mas połączonych dwoma sprężynami. Obie masy podlegają tłumieniu, a ich ruch jest opisany przez układ równań różniczkowych drugiego rzędu. Równania te uwzględniają siłę działającą na masy z powodu sprężyn oraz tłumienie.
 
 ```python
 import numpy as np
@@ -1674,11 +1727,9 @@ plt.tight_layout()
 # plt.tight_layout()
 # plt.savefig("symulacja_mas.pdf")  # Zapis wykresu do pliku PDF
 plt.show()
-
-
 ```
 
-### V2
+## Symulacja ruchu dwóch mas połączonych sprężynami 
 
 ```python
 
@@ -1736,7 +1787,7 @@ plt.grid(True)
 plt.show()
 ```
 
-### Laboratorium 10 - Wachadło
+### Laboratorium 10 - Symulacja ruchu wahadła z wymuszeniem
 
 ```python
 
