@@ -600,8 +600,8 @@ plt.title('Zbieżność metody bisekcji')
 plt.show()
 ```
 
-### 1: Zaimplementowanie algorytmu obliczania miejsc zerowych dla funkcji:
-$$ \( f(x) = x^2 - 2 \) $$ 
+### 1. Zaimplementowanie algorytmu obliczania miejsc zerowych dla funkcji:
+$$ \ f(x) = x^2 - 2 \ $$ 
 ### w przedziale [0, 3].
 
 ```python
@@ -637,7 +637,7 @@ print("Tabela iteracji:")
 print(iterations)
 ```
 
-### 2: Przedstaw w postaci tabeli kolejne kroki przybliżeń jakie zostały otrzymane.
+### 2. Przedstaw w postaci tabeli kolejne kroki przybliżeń jakie zostały otrzymane.
 
 ```python
 import pandas as pd
@@ -645,7 +645,7 @@ import pandas as pd
 pd.DataFrame(iterations, columns=["a", "b", "c"])
 ```
 
-### 3: Testowanie algorytmu dla różnych wartości dokładności (delta)
+### 3. Testowanie algorytmu dla różnych wartości dokładności (delta)
 
 ```python
 # Możemy zmieniać wartość delta i obserwować wpływ na liczbę iteracji:
@@ -657,10 +657,10 @@ for delta in deltas:
     print(f"Pierwiastek dla delta={delta}: {root}, Liczba iteracji: {iterations.shape[0]}")
 ```
 
-### 4: Jak zmienia się liczba iteracji w zależności od delta
+### 4. Jak zmienia się liczba iteracji w zależności od delta
 Liczba iteracji będzie maleć w miarę zmniejszania się wartości delta, ponieważ dokładność rozwiązania będzie coraz wyższa.
 
-### 5: Modyfikacja skryptu do wyznaczania miejsc zerowych w przedziale [-3, 3]
+### 5. Modyfikacja skryptu do wyznaczania miejsc zerowych w przedziale [-3, 3]
 Aby znaleźć pierwiastki w przedziale [-3, 3], wystarczy zmienić przedziały na:
 
 ```python
@@ -669,7 +669,7 @@ root, iterations = bisection_method(f, a, b, delta)
 ```
 
 # 3.2 Metoda Newtona
-### 1: Implementacja algorytmu obliczania pierwiastka trzeciego stopnia
+### 1. Implementacja algorytmu obliczania pierwiastka trzeciego stopnia
 
 ```python
 def f_cubic(x, a):
@@ -693,7 +693,7 @@ def newton_method(f, f_prime, x0, delta, max_iter=1000):
     return x, np.array(iterations)
 ```
 
-### 2: Wybór metody określania dokładności obliczeń
+### 2. Wybór metody określania dokładności obliczeń
 Użyjemy warunku zakończenia: 
 
 ```python
@@ -720,7 +720,7 @@ x0 = 5
 x_values = newton_cubic_root(a, epsilon, max_iter, x0)
 ```
 
-### 3: Modyfikacja programu dla różnych punktów startowych
+### 3. Modyfikacja programu dla różnych punktów startowych
 Aby zrealizować ten punkt, generujemy różne wartości początkowe 
 
 ```python
@@ -741,7 +741,22 @@ plt.title(f"Dążenie algorytmu Newtona do wyniku dla liczby {chosen_number}")
 plt.show()
 ```
 
-### 4: wylosuj cztery różne punkty startowe i wykreśl zależność pokazującą dążenie algorytmu do wyniku (xk = f(iteracja))
+### 4. Wylosuj **cztery różne punkty startowe** i wykreśl wykres przedstawiający **zbieżność metody Newtona** do rozwiązania równania nieliniowego dla funkcji:  
+$$
+f(x) = x^3 - a
+$$
+
+Zależność, którą należy przedstawić na wykresie, ma postać:
+
+$$
+x_k = f(\text{iteracja})
+$$
+
+Gdzie:
+
+$x_k$ — wartość przybliżona w $k$-tej iteracji algorytmu,
+
+$\text{iteracja}$ — numer kroku iteracyjnego.
 
 ```python
 import numpy as np
