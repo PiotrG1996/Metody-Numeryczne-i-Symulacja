@@ -431,9 +431,8 @@ W ćwiczeniu opracowany został program, który na podstawie plików wejściowyc
 
 Program analizuje sygnał wzorcowy oraz zaszumiony, obliczając błędy, wartość skuteczną, odchylenie standardowe oraz błędy średnie.
 
-## Zadania
 
-### Zadanie 1 - Określenie błędów dla poszczególnych próbek sygnału
+### 1. Określenie błędów dla poszczególnych próbek sygnału
 
 Błąd dla każdej próbki sygnału obliczany jest jako różnica między wartością zaszumionego sygnału a wartością sygnału wzorcowego:
 
@@ -458,7 +457,7 @@ print("Błędy dla poszczególnych próbek sygnału:")
 print(errors)
 ```
 
-### Zadanie 2 - Określ jaki jest błąd średni (względny, bezwzględny dla sygnału zaszumionego i wzorcowego) oraz jak on wpływa na kształt zaszumionego sygnału (obliczyć nowe wartości próbek zaszumionych z uwzględnieniem błędu średniego).
+### 2. Określ jaki jest błąd średni (względny, bezwzględny dla sygnału zaszumionego i wzorcowego) oraz jak on wpływa na kształt zaszumionego sygnału (obliczyć nowe wartości próbek zaszumionych z uwzględnieniem błędu średniego).
 
 ![Przykład](images/blad_sredni.png)
 
@@ -668,7 +667,8 @@ a, b = -3, 3
 root, iterations = bisection_method(f, a, b, delta)
 ```
 
-# 3.2 Metoda Newtona
+## 3.2 Metoda Newtona
+
 ### 1. Implementacja algorytmu obliczania pierwiastka trzeciego stopnia
 
 ```python
@@ -813,7 +813,7 @@ plt.grid(True)
 plt.show()
 ```
 
-### 5: Obliczenie pierwiastków 3 stopnia dla liczb w zakresie od 1 do 100000
+### 5. Obliczenie pierwiastków 3 stopnia dla liczb w zakresie od 1 do 100000
 
 ```python
 
@@ -860,7 +860,7 @@ print(f"Współczynnik korelacji Pearsona: {correlation[0, 1]}")
 
 ```
 
-### 5: Korelacja między liczbą podpierwiastkową a ilością iteracji
+### 6. Korelacja między liczbą podpierwiastkową a ilością iteracji
 Na wykresie widać, jak liczba iteracji zmienia się w zależności od liczby podpierwiastkowej. Wiele razy liczba iteracji nie zależy w prosty sposób od wartości 
 𝑎
 a, ale może być różna w zależności od punktu startowego i zbieżności metody Newtona.
