@@ -3,7 +3,9 @@
 
 Ten dokument zawiera rozwiązania zadań przy użyciu Pythona i biblioteki NumPy. Każde zadanie jest wyjaśnione w komentarzach i zilustrowane przykładowym kodem.
 
-[Link z opisem biblioteki NumPy](https://cs231n.github.io/python-numpy-tutorial/)
+🔢 [Wprowadzenie do biblioteki NumPy](https://cs231n.github.io/python-numpy-tutorial/)
+
+📚 [Materiały uzupełniające](https://github.com/metody-numeryczne/Metody-Numeryczne-Poradnik-Studencki)
 
 ### 1. Tworzenie katalogu
 Aby utworzyć katalog w Pythonie, użyj funkcji os.mkdir(). Możesz również sprawdzić, czy katalog już istnieje, aby uniknąć błędów.
