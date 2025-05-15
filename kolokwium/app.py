@@ -131,7 +131,7 @@ def main():
         page_icon="🧪",
         layout="centered"
     )
-    st.title("🧪 Termin 0 - Laboratorium MNiS")
+    st.title("🧪 Termin 1 - Laboratorium MNiS")
     
     initialize_session_state()
 
