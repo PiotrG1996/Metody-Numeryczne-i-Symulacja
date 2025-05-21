@@ -214,26 +214,30 @@ def main():
 
     if st.session_state.results:
         st.subheader("📊 Wyniki")
-        
+
         for idx, result in enumerate(st.session_state.results["results"]):
             question = st.session_state.questions[idx]
             user_answer = result["user_answer"] if result["user_answer"] else "BRAK ODPOWIEDZI"
-            
+            explanation = question["explanation"] 
+            if not explanation:
+                explanation = "Brak wyjaśnienia dla tego pytania."
+
             col1, col2 = st.columns([1, 4])
             with col1:
                 st.markdown(f"**Pytanie {idx+1}**")
                 st.markdown("✅" if result["is_correct"] else "❌")
-                
+
             with col2:
                 st.markdown(f"**{question['question']}**")
                 st.markdown(f"Twoja odpowiedź: `{user_answer}`")
                 st.markdown(f"Poprawna odpowiedź: `{question['correct']}`")
-                if "explanation" in question:
-                    st.info(f"**Wyjaśnienie:** {question['explanation']}")
+                st.info(f"**Wyjaśnienie:** {explanation}")
                 st.divider()
 
         st.metric("Wynik końcowy", 
                 f"{st.session_state.results['score']}/{len(st.session_state.questions)}")
-        
+
+
+
 if __name__ == "__main__":
     main()

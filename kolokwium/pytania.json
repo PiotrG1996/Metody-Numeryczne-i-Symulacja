@@ -1,92 +1,1197 @@
 [
   {
-    "question": "Które polecenie usuwa zmienne z pamięci?",
+    "question": "Jak rozwiązać układ równań liniowych w Pythonie przy użyciu NumPy?",
     "options": {
-      "a": "clc",
-      "b": "clear",
-      "c": "del",
-      "d": "remove"
+      "a": "Używając np.linalg.inv()",
+      "b": "Używając np.linalg.solve()",
+      "c": "Używając np.linalg.det()",
+      "d": "Używając np.linalg.eig()"
     },
-    "correct": "b"
+    "correct": "b",
+    "explanation": "Aby rozwiązać układ równań liniowych w Pythonie, używamy funkcji np.linalg.solve(), która bierze jako argumenty macierz współczynników i wektor wyników."
   },
   {
-    "question": "Jak wyczyścić konsolę w Pythonie?",
+    "question": "Jaki jest wynik rozwiązania układu równań:\n2x - 3y + z = 1\n4x + y - 2z = -2\n-3x + 2y + 3z = 3",
     "options": {
-      "a": "os.clear()",
-      "b": "os.system('cls')",
-      "c": "console.reset()",
-      "d": "clean()"
+      "a": "x = 1.0, y = -1.0, z = 2.0",
+      "b": "x = 0.0, y = 1.0, z = -1.0",
+      "c": "x = 2.0, y = -2.0, z = 1.0",
+      "d": "x = -1.0, y = 2.0, z = 0.0"
     },
-    "correct": "b"
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[2, -3, 1], [4, 1, -2], [-3, 2, 3]])\nb = np.array([1, -2, 3])\nx = np.linalg.solve(A, b)\nprint(x)",
+    "explanation": "Po rozwiązaniu układu równań, wartości zmiennych x, y, z to: x = 1.0, y = -1.0, z = 2.0."
   },
   {
-    "question": "Które polecenie wyświetla nazwy zmiennych w pamięci?",
+    "question": "Która metoda całkowania numerycznego wykorzystuje wielomian stopnia 0 do przybliżenia funkcji podcałkowej?",
     "options": {
-      "a": "globals()",
-      "b": "vars()",
-      "c": "locals()",
-      "d": "print(globals())"
+      "a": "Metoda trapezów",
+      "b": "Metoda prostokątów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Monte Carlo"
     },
-    "correct": "a"
+    "correct": "b",
+    "explanation": "Metoda prostokątów przybliża funkcję podcałkową za pomocą funkcji stałej (wielomian stopnia 0), wykorzystując wartość funkcji w środku przedziału."
   },
   {
-    "question": "Która funkcja generuje macierz jednostkową 5x5?",
+    "question": "Jak nazywa się metoda całkowania numerycznego, która dzieli przedział całkowania na podprzedziały i sumuje przybliżenia na każdym z nich?",
     "options": {
-      "a": "np.ones(5)",
-      "b": "np.eye(5)",
-      "c": "np.identity(5)",
-      "d": "np.unit(5)"
+      "a": "Metoda iteracyjna",
+      "b": "Metoda Gaussa",
+      "c": "Metoda Romberga",
+      "d": "Metoda Newtona"
     },
-    "correct": "b"
+    "correct": "a",
+    "explanation": "Iteracyjna metoda trapezów polega na podziale przedziału całkowania na n podprzedziałów, obliczeniu przybliżeń na każdym z nich za pomocą wzoru trapezów i zsumowaniu wyników."
   },
   {
-    "question": "Jak utworzyć macierz zerową 3x3 w NumPy?",
+    "question": "Która z poniższych nazw jest alternatywną nazwą metody prostokątów?",
     "options": {
-      "a": "np.zeros(3, 3)",
-      "b": "np.zeros((3, 3))",
-      "c": "np.empty(3x3)",
-      "d": "np.matrix.zeros(3)"
+      "a": "Metoda punktu środkowego",
+      "b": "Metoda średniej wartości",
+      "c": "Metoda stycznych",
+      "d": "Metoda Newtona-Cotesa"
     },
-    "correct": "b"
+    "correct": "a",
+    "explanation": "Metoda prostokątów jest również nazywana metodą punktu środkowego, gdyż wykorzystuje wartość funkcji w środku przedziału do przybliżenia całki."
   },
   {
-    "question": "Które polecenie generuje macierz diagonalną z wartościami [1, 2, 3]?",
+    "question": "W jaki sposób można zwiększyć dokładność metody trapezów?",
     "options": {
-      "a": "np.diag([1, 2, 3])",
-      "b": "np.diagonal(1, 2, 3)",
-      "c": "np.matrix.diag(1, 2, 3)",
-      "d": "np.fill_diagonal([1, 2, 3])"
+      "a": "Zmniejszając liczbę podprzedziałów",
+      "b": "Zwiększając liczbę podprzedziałów",
+      "c": "Używając wyższych stopni wielomianów",
+      "d": "Całkując analitycznie"
     },
-    "correct": "a"
+    "correct": "b",
+    "explanation": "Dokładność metody trapezów można zwiększyć poprzez podział przedziału całkowania na większą liczbę podprzedziałów (zwiększenie n), co pozwala lepiej przybliżyć funkcję podcałkową."
   },
   {
-    "question": "Jak wybrać drugą kolumnę macierzy a w NumPy?",
+    "question": "Który wzór przedstawia metodę trapezów?",
     "options": {
-      "a": "a[2, :]",
-      "b": "a[:, 2]",
-      "c": "a[2]",
-      "d": "a(: , 2)"
+      "a": "(b - a) * f((a + b)/2)",
+      "b": "(b - a) * (f(a) + f(b)) / 2",
+      "c": "h * sum_{i=1}^n f(x_i)",
+      "d": "(h/3) * (f(a) + 4f((a+b)/2) + f(b))"
     },
-    "correct": "b"
+    "correct": "b",
+    "explanation": "Metoda trapezów wykorzystuje wzór (b - a) * (f(a) + f(b)) / 2, który przybliża całkę jako pole trapezu.",
+    "code": "import numpy as np\n\ndef trapezoidal_rule(f, a, b):\n    return (b - a) * (f(a) + f(b)) / 2\n\n# Przykład: całka z sin(x) od 0 do pi\nresult = trapezoidal_rule(np.sin, 0, np.pi)\nprint(f\"Przybliżona wartość całki: {result:.4f}\")"
+  },
+  
+  {
+    "question": "Kiedy metoda prostokątów daje dobre przybliżenie wartości całki?",
+    "options": {
+      "a": "Gdy funkcja silnie oscyluje",
+      "b": "Gdy funkcja zmienia się nieznacznie w przedziale całkowania",
+      "c": "Gdy funkcja jest wielomianem wysokiego stopnia",
+      "d": "Gdy przedział całkowania jest bardzo duży"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów zapewnia dobre wyniki, gdy funkcja podcałkowa zmienia się w niewielkim stopniu w przedziale (a, b), ponieważ przybliżenie stałą funkcją jest wtedy bardziej dokładne.",
+    "code": "import numpy as np\n\ndef rectangle_rule(f, a, b, n):\n    h = (b - a) / n\n    x = np.linspace(a, b - h, n)  # lewostronne prostokąty\n    return h * np.sum(f(x))\n\n# Przykład: całka z cos(x) od 0 do pi/2\nresult = rectangle_rule(np.cos, 0, np.pi/2, 100)\nprint(f\"Przybliżona wartość całki: {result:.4f}\")"
+  },
+  
+  {
+    "question": "W jakim zastosowaniu, konieczne jest implementowanie numerycznego całkowania?",
+    "options": {
+      "a": "Obliczanie równań różniczkowych",
+      "b": "Symulacje Monte Carlo",
+      "c": "Systemy sterowania z regulatorem PID",
+      "d": "Optymalizacja funkcji"
+    },
+    "correct": "c",
+    "explanation": "W systemach sterowania, np. z regulatorem PID, konieczne jest numeryczne całkowanie sygnału dyskretnego w celu realizacji członu całkującego."
+  },
+
+  {
+    "question": "Jaką funkcję NumPy należy użyć do rozwiązania układu równań liniowych Ax = b?",
+    "options": {
+      "a": "np.linalg.inv()",
+      "b": "np.linalg.solve()",
+      "c": "np.linalg.det()",
+      "d": "np.linalg.eig()"
+    },
+    "correct": "b",
+    "explanation": "Funkcja np.linalg.solve() służy do bezpośredniego rozwiązywania układu równań liniowych Ax = b."
   },
   {
-    "question": "Które polecenie łączy macierze a i b poziomo?",
+    "question": "Co oznacza wartość wyznacznika macierzy równa 0?",
     "options": {
-      "a": "np.concatenate(a, b)",
-      "b": "np.hstack((a, b))",
-      "c": "np.vstack((a, b))",
-      "d": "np.join(a, b)"
+      "a": "Macierz jest osobliwa i układ nie ma rozwiązania lub ma nieskończenie wiele",
+      "b": "Układ równań zawsze ma jedno rozwiązanie",
+      "c": "Macierz jest ortogonalna",
+      "d": "Macierz ma tylko liczby całkowite"
     },
-    "correct": "b"
+    "correct": "a",
+    "explanation": "Wyznacznik równy 0 oznacza, że macierz jest osobliwa – nieodwracalna – co uniemożliwia jednoznaczne rozwiązanie układu."
   },
   {
-    "question": "Jak transponować macierz a w NumPy?",
+    "question": "Która z funkcji NumPy oblicza wartości własne macierzy?",
     "options": {
-      "a": "a.transpose()",
-      "b": "a.T",
-      "c": "np.transpose(a)",
-      "d": "Wszystkie powyższe"
+      "a": "np.linalg.inv()",
+      "b": "np.linalg.solve()",
+      "c": "np.linalg.eig()",
+      "d": "np.linalg.det()"
     },
-    "correct": "d"
+    "correct": "c",
+    "explanation": "Funkcja np.linalg.eig() służy do obliczania wartości i wektorów własnych macierzy."
+  },
+  
+  {
+    "question": "Jakie jest zastosowanie funkcji np.linalg.det()?",
+    "options": {
+      "a": "Rozwiązywanie układów równań",
+      "b": "Obliczanie wartości własnych",
+      "c": "Obliczanie wyznacznika macierzy",
+      "d": "Obliczanie normy macierzy"
+    },
+    "correct": "c",
+    "explanation": "Funkcja np.linalg.det() służy do obliczania wyznacznika macierzy."
+  },
+  {
+    "question": "Która z poniższych funkcji NIE należy do biblioteki NumPy?",
+    "options": {
+      "a": "np.linalg.solve",
+      "b": "np.linalg.eig",
+      "c": "np.linalg.integrate",
+      "d": "np.linalg.det"
+    },
+    "correct": "c",
+    "explanation": "Funkcja integrate należy do biblioteki SciPy (scipy.integrate), a nie do NumPy."
+  },
+  {
+    "question": "Która metoda numerycznego całkowania wykorzystuje funkcję stałą do aproksymacji pola?",
+    "options": {
+      "a": "Metoda trapezów",
+      "b": "Metoda prostokątów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Romberga"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów przybliża całkę za pomocą wartości funkcji w jednym punkcie – zwykle w środku – co odpowiada aproksymacji funkcją stałą."
+  },
+  {
+    "question": "Która metoda przybliża całkę za pomocą funkcji liniowej (pierwszego stopnia)?",
+    "options": {
+      "a": "Metoda trapezów",
+      "b": "Metoda prostokątów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Gaussa"
+    },
+    "correct": "a",
+    "explanation": "Metoda trapezów opiera się na przybliżeniu funkcji podcałkowej linią prostą między dwoma punktami."
+  },
+  {
+    "question": "Jaką funkcję z biblioteki SciPy należy użyć do metody Simpsona?",
+    "options": {
+      "a": "scipy.integrate.trapz",
+      "b": "scipy.integrate.simps",
+      "c": "scipy.integrate.romberg",
+      "d": "scipy.integrate.quad"
+    },
+    "correct": "b",
+    "explanation": "Funkcja scipy.integrate.simps() implementuje metodę Simpsona dla tablicy wartości funkcji."
+  },
+  {
+    "question": "Na czym polega metoda Romberga?",
+    "options": {
+      "a": "Interpolacja punktów Newtona",
+      "b": "Wielokrotne zastosowanie metody trapezów z ekstrapolacją",
+      "c": "Losowe próbkowanie",
+      "d": "Rozwijanie funkcji w szereg"
+    },
+    "correct": "b",
+    "explanation": "Romberg wykorzystuje wzór trapezów dla coraz mniejszych kroków, a następnie stosuje ekstrapolację Richardson’a."
+  },
+  {
+    "question": "Jak zwiększyć dokładność metody prostokątów?",
+    "options": {
+      "a": "Zwiększając długość przedziałów",
+      "b": "Zwiększając liczbę podprzedziałów",
+      "c": "Zmniejszając krok całkowania do 0",
+      "d": "Zastępując funkcję stałą funkcją sześcienną"
+    },
+    "correct": "b",
+    "explanation": "Większa liczba podziałów (mniejszy krok h) zwiększa dokładność przybliżenia całki metodą prostokątów."
+  },
+  {
+    "question": "Która z metod całkowania jest najbardziej efektywna dla funkcji gładkich?",
+    "options": {
+      "a": "Metoda prostokątów",
+      "b": "Metoda Simpsona",
+      "c": "Metoda trapezów",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "b",
+    "explanation": "Dla funkcji gładkich metoda Simpsona daje bardzo dobre wyniki, ponieważ przybliża funkcję parabolą (wielomian drugiego stopnia)."
+  },
+  {
+    "question": "Jak rozwiązać układ równań liniowych w Pythonie przy użyciu NumPy?",
+    "options": {
+      "a": "Używając np.linalg.inv()",
+      "b": "Używając np.linalg.solve()",
+      "c": "Używając np.linalg.det()",
+      "d": "Używając np.linalg.eig()"
+    },
+    "correct": "b",
+    "explanation": "Aby rozwiązać układ równań liniowych w Pythonie, używamy funkcji np.linalg.solve(), która bierze jako argumenty macierz współczynników i wektor wyników."
+  },
+  {
+    "question": "Jaki jest wynik rozwiązania układu równań:\n2x - 3y + z = 1\n4x + y - 2z = -2\n-3x + 2y + 3z = 3",
+    "options": {
+      "a": "x = 1.0, y = -1.0, z = 2.0",
+      "b": "x = 0.0, y = 1.0, z = -1.0",
+      "c": "x = 2.0, y = -2.0, z = 1.0",
+      "d": "x = -1.0, y = 2.0, z = 0.0"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[2, -3, 1], [4, 1, -2], [-3, 2, 3]])\nb = np.array([1, -2, 3])\nx = np.linalg.solve(A, b)\nprint(x)",
+    "explanation": "Po rozwiązaniu układu równań, wartości zmiennych x, y, z to: x = 1.0, y = -1.0, z = 2.0."
+  },
+  {
+    "question": "Która metoda całkowania numerycznego wykorzystuje wielomian stopnia 0 do przybliżenia funkcji podcałkowej?",
+    "options": {
+      "a": "Metoda trapezów",
+      "b": "Metoda prostokątów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów przybliża funkcję podcałkową za pomocą funkcji stałej (wielomian stopnia 0), wykorzystując wartość funkcji w środku przedziału."
+  },
+  {
+    "question": "Jak nazywa się metoda całkowania numerycznego, która dzieli przedział całkowania na podprzedziały i sumuje przybliżenia na każdym z nich?",
+    "options": {
+      "a": "Metoda iteracyjna",
+      "b": "Metoda Gaussa",
+      "c": "Metoda Romberga",
+      "d": "Metoda Newtona"
+    },
+    "correct": "a",
+    "explanation": "Iteracyjna metoda trapezów polega na podziale przedziału całkowania na n podprzedziałów, obliczeniu przybliżeń na każdym z nich za pomocą wzoru trapezów i zsumowaniu wyników."
+  },
+  {
+    "question": "Która z poniższych nazw jest alternatywną nazwą metody prostokątów?",
+    "options": {
+      "a": "Metoda punktu środkowego",
+      "b": "Metoda średniej wartości",
+      "c": "Metoda stycznych",
+      "d": "Metoda Newtona-Cotesa"
+    },
+    "correct": "a",
+    "explanation": "Metoda prostokątów jest również nazywana metodą punktu środkowego, gdyż wykorzystuje wartość funkcji w środku przedziału do przybliżenia całki."
+  },
+
+  {
+    "question": "Metoda trapezów wykorzystuje do przybliżenia funkcji podcałkowej wielomian stopnia:",
+    "options": {
+      "a": "0",
+      "b": "1",
+      "c": "2",
+      "d": "3"
+    },
+    "correct": "b",
+    "explanation": "Metoda trapezów przybliża funkcję podcałkową za pomocą funkcji liniowej, czyli wielomianu stopnia pierwszego."
+  },
+  {
+    "question": "Kiedy metoda prostokątów daje dobre przybliżenie wartości całki?",
+    "options": {
+      "a": "Gdy funkcja silnie oscyluje",
+      "b": "Gdy funkcja zmienia się nieznacznie w przedziale całkowania",
+      "c": "Gdy funkcja jest wielomianem wysokiego stopnia",
+      "d": "Gdy przedział całkowania jest bardzo duży"
+    },
+    "correct": "b",
+    "explanation": "Metoda prostokątów zapewnia dobre wyniki, gdy funkcja podcałkowa zmienia się w niewielkim stopniu w przedziale (a, b), ponieważ przybliżenie stałą funkcją jest wtedy bardziej dokładne."
+  },
+  {
+    "question": "W jakim zastosowaniu, według tekstu, konieczne jest implementowanie numerycznego całkowania?",
+    "options": {
+      "a": "Obliczanie równań różniczkowych",
+      "b": "Symulacje Monte Carlo",
+      "c": "Systemy sterowania z regulatorem PID",
+      "d": "Optymalizacja funkcji"
+    },
+    "correct": "c",
+    "explanation": "W systemach sterowania, np. z regulatorem PID, konieczne jest numeryczne całkowanie sygnału dyskretnego w celu realizacji członu całkującego."
+  },
+  {
+    "question": "Jakiego rodzaju funkcję przybliżającą wykorzystuje interpolacja Lagrange’a?",
+    "options": {
+      "a": "Funkcję wykładniczą",
+      "b": "Funkcję sklejanych wielomianów",
+      "c": "Wielomian interpolacyjny",
+      "d": "Funkcję trygonometryczną"
+    },
+    "correct": "c",
+    "explanation": "Interpolacja Lagrange’a przybliża dane za pomocą jednego wielomianu interpolacyjnego, który przechodzi przez wszystkie punkty danych."
+  },
+  {
+    "question": "Która metoda interpolacji może prowadzić do oscylacji Rungego przy dużej liczbie węzłów?",
+    "options": {
+      "a": "Interpolacja sklejanymi wielomianami",
+      "b": "Interpolacja Lagrange’a",
+      "c": "Interpolacja liniowa",
+      "d": "Interpolacja trygonometryczna"
+    },
+    "correct": "b",
+    "explanation": "Interpolacja Lagrange’a przy dużej liczbie węzłów i równomiernym ich rozstawie może prowadzić do oscylacji Rungego, czyli dużych odchyleń funkcji interpolacyjnej."
+  },
+  {
+    "question": "Jaka jest podstawowa zaleta interpolacji wielomianami sklejanymi (spline)?",
+    "options": {
+      "a": "Zawsze daje dokładne wartości",
+      "b": "Unika oscylacji Rungego",
+      "c": "Wymaga mniej danych",
+      "d": "Jest szybsza od interpolacji liniowej"
+    },
+    "correct": "b",
+    "explanation": "Interpolacja sklejanymi wielomianami (spline) unika problemu oscylacji, ponieważ zamiast jednego wysokiego stopnia wielomianu używa niskiego stopnia wielomianów na małych przedziałach."
+  },
+  {
+    "question": "Do czego służy funkcja `scipy.interpolate.interp1d()`?",
+    "options": {
+      "a": "Do rozwiązywania równań różniczkowych",
+      "b": "Do znajdowania pierwiastków funkcji",
+      "c": "Do przeprowadzania interpolacji jednowymiarowej",
+      "d": "Do obliczania pochodnych"
+    },
+    "correct": "c",
+    "explanation": "Funkcja `interp1d()` z biblioteki SciPy służy do tworzenia funkcji interpolacyjnej na podstawie jednowymiarowych danych wejściowych."
+  },
+  {
+    "question": "Co oznacza parametr kind='cubic' w funkcji `interp1d()`?",
+    "options": {
+      "a": "Użycie interpolacji liniowej",
+      "b": "Użycie interpolacji wykładniczej",
+      "c": "Użycie interpolacji sklejanymi funkcjami liniowymi",
+      "d": "Użycie interpolacji sklejanymi funkcjami sześciennymi"
+    },
+    "correct": "d",
+    "explanation": "Parametr `kind='cubic'` oznacza użycie funkcji sklejanych sześciennych (cubic splines), co zapewnia płynność i gładkość interpolacji."
+  },
+  {
+    "question": "Jaki warunek musi spełniać funkcja interpolacyjna?",
+    "options": {
+      "a": "Musi być ciągła i różniczkowalna",
+      "b": "Musi przechodzić przez wszystkie punkty danych",
+      "c": "Musi być funkcją wykładniczą",
+      "d": "Musi mieć największy możliwy stopień"
+    },
+    "correct": "b",
+    "explanation": "Funkcja interpolacyjna powinna przechodzić dokładnie przez wszystkie węzły interpolacyjne, co oznacza, że f(x_i) = y_i dla każdego punktu danych."
+  },
+  {
+    "question": "Która interpolacja jest najbardziej odpowiednia dla danych z szumem?",
+    "options": {
+      "a": "Interpolacja Lagrange’a",
+      "b": "Interpolacja Newtona",
+      "c": "Interpolacja splajnami",
+      "d": "Aproksymacja metodą najmniejszych kwadratów"
+    },
+    "correct": "d",
+    "explanation": "W przypadku danych z szumem nie zaleca się interpolacji przechodzącej przez wszystkie punkty, lecz użycie aproksymacji, np. metodą najmniejszych kwadratów."
+  },
+  {
+    "question": "Jaki jest główny problem interpolacji wysokiego stopnia wielomianami?",
+    "options": {
+      "a": "Brak ciągłości",
+      "b": "Niski koszt obliczeniowy",
+      "c": "Oscylacje Rungego",
+      "d": "Trudność implementacji"
+    },
+    "correct": "c",
+    "explanation": "Wysokiego stopnia wielomiany interpolacyjne mogą prowadzić do znacznych oscylacji, zwłaszcza przy równomiernym rozkładzie węzłów, co znane jest jako zjawisko Rungego."
+  },
+  {
+    "question": "Dlaczego interpolacja splajnami kubicznymi jest często preferowana w praktyce?",
+    "options": {
+      "a": "Ponieważ używa jednego globalnego wielomianu",
+      "b": "Ponieważ nie wymaga danych wejściowych",
+      "c": "Ponieważ zapewnia ciągłość pierwszej i drugiej pochodnej",
+      "d": "Ponieważ jest bardziej dokładna niż interpolacja trygonometryczna"
+    },
+    "correct": "c",
+    "explanation": "Splajny kubiczne zapewniają nie tylko ciągłość funkcji, ale także jej pochodnych do drugiego rzędu, co daje gładką krzywą."
+  },
+  {
+    "question": "Która funkcja z biblioteki SciPy umożliwia interpolację wielowymiarową?",
+    "options": {
+      "a": "scipy.interpolate.interp1d",
+      "b": "scipy.interpolate.griddata",
+      "c": "scipy.interpolate.lagrange",
+      "d": "scipy.interpolate.bisplrep"
+    },
+    "correct": "b",
+    "explanation": "Funkcja `griddata()` służy do interpolacji danych w wielu wymiarach, np. dla danych przestrzennych 2D lub 3D."
+  },
+  {
+    "question": "Która z metod służy do rozwiązywania równań nieliniowych?",
+    "options": {
+      "a": "Metoda prostokątów",
+      "b": "Metoda Newtona-Raphsona",
+      "c": "Metoda Rungego-Kutty",
+      "d": "Metoda Gaussa"
+    },
+    "correct": "b",
+    "explanation": "Metoda Newtona-Raphsona jest jedną z podstawowych metod iteracyjnych do rozwiązywania równań nieliniowych typu f(x) = 0."
+  },
+  {
+    "question": "Jakie jest podstawowe założenie metody Newtona-Raphsona?",
+    "options": {
+      "a": "Funkcja musi być liniowa",
+      "b": "Funkcja musi być całkowalna",
+      "c": "Funkcja musi być różniczkowalna",
+      "d": "Funkcja musi być ograniczona"
+    },
+    "correct": "c",
+    "explanation": "Metoda Newtona-Raphsona opiera się na rozwinięciu funkcji w szereg Taylora, co wymaga jej różniczkowalności."
+  },
+  {
+    "question": "Które z poniższych wyrażeń jest iteracyjnym wzorem metody Newtona-Raphsona?",
+    "options": {
+      "a": "x_{n+1} = x_n - f(x_n) * f'(x_n)",
+      "b": "x_{n+1} = x_n + f(x_n)",
+      "c": "x_{n+1} = x_n - f(x_n)/f'(x_n)",
+      "d": "x_{n+1} = x_n * f(x_n)/f''(x_n)"
+    },
+    "code": "import numpy as np\n\n# Definiowanie funkcji f oraz jej pochodnej f'\ndef f(x):\n    return x**2 - 2  # Przykład: funkcja f(x) = x^2 - 2 (pierwiastek z 2)\n\ndef df(x):\n    return 2*x  # Pochodna funkcji f(x)\n\n# Implementacja metody Newtona-Raphsona\ndef newton_method(f, df, x0, tolerance=1e-6, max_iterations=1000):\n    x = x0\n    for i in range(max_iterations):\n        x_new = x - f(x) / df(x)\n        if abs(x_new - x) < tolerance:  # Sprawdzenie zbieżności\n            return x_new\n        x = x_new\n    return x  # Zwracamy wynik po maksymalnej liczbie iteracji\n\n# Przykład: obliczanie pierwiastka z 2\nx0 = 1.0  # Początkowe przybliżenie\nresult = newton_method(f, df, x0)\nprint(f'Przybliżona wartość pierwiastka z 2: {result}')",
+    "correct": "c",
+    "explanation": "Standardowy wzór metody Newtona-Raphsona to x_{n+1} = x_n - f(x_n)/f'(x_n)."
+  },
+  {
+    "question": "Jaka biblioteka Pythona udostępnia funkcję newton() do rozwiązywania równań nieliniowych?",
+    "options": {
+      "a": "NumPy",
+      "b": "Math",
+      "c": "SymPy",
+      "d": "SciPy"
+    },
+    "correct": "d",
+    "explanation": "Funkcja `newton()` dostępna jest w module `scipy.optimize` i implementuje różne warianty metody Newtona."
+  },
+  {
+    "question": "Która z metod jest metodą przedziałową i wymaga zmiany znaku funkcji?",
+    "options": {
+      "a": "Metoda siecznych",
+      "b": "Metoda Newtona-Raphsona",
+      "c": "Metoda bisekcji",
+      "d": "Metoda trapezów"
+    },
+    "correct": "c",
+    "explanation": "Metoda bisekcji wymaga, by funkcja zmieniała znak na końcach przedziału – jest to warunek konieczny rozpoczęcia iteracji."
+  },
+  {
+    "question": "Dlaczego metoda bisekcji zawsze zbiega do rozwiązania (o ile istnieje)?",
+    "options": {
+      "a": "Bo używa pochodnych funkcji",
+      "b": "Bo jest liniowa",
+      "c": "Bo zawęża przedział z pierwiastkiem",
+      "d": "Bo interpoluje funkcję"
+    },
+    "correct": "c",
+    "explanation": "Metoda bisekcji systematycznie zmniejsza długość przedziału, w którym znajduje się pierwiastek, zapewniając zbieżność."
+  },
+  {
+    "question": "Która metoda NIE wymaga znajomości pochodnej funkcji?",
+    "options": {
+      "a": "Newton-Raphson",
+      "b": "Bisekcji",
+      "c": "Metoda Newtona z przybliżoną pochodną",
+      "d": "Wszystkie wymagają pochodnej"
+    },
+    "correct": "b",
+    "explanation": "Metoda bisekcji opiera się wyłącznie na znaku funkcji i nie wymaga obliczania pochodnych."
+  },
+  {
+    "question": "Jakie jest typowe kryterium zakończenia iteracji przy rozwiązywaniu równania nieliniowego?",
+    "options": {
+      "a": "Gdy liczba iteracji przekroczy 3",
+      "b": "Gdy pochodna funkcji wynosi zero",
+      "c": "Gdy |f(x_n)| < ε lub |x_{n+1} - x_n| < ε",
+      "d": "Gdy f(x_n) osiąga maksimum"
+    },
+    "correct": "c",
+    "explanation": "Typowe warunki zakończenia iteracji to osiągnięcie zadanej dokładności: wartość funkcji bliska zeru lub niewielka zmiana kolejnych przybliżeń."
+  },
+  {
+    "question": "Która biblioteka Pythona zawiera funkcję do rozwiązywania równań różniczkowych zwyczajnych (ODE)?",
+    "options": {
+      "a": "numpy.linalg",
+      "b": "scipy.integrate",
+      "c": "math",
+      "d": "sympy"
+    },
+    "correct": "b",
+    "explanation": "Moduł `scipy.integrate` zawiera funkcje, takie jak `solve_ivp()` i `odeint()`, przeznaczone do rozwiązywania ODE."
+  },
+  {
+    "question": "Która z funkcji biblioteki SciPy służy do rozwiązywania równań różniczkowych metodą Rungego-Kutty?",
+    "options": {
+      "a": "odeint()",
+      "b": "solve_ivp()",
+      "c": "rk4()",
+      "d": "integrate()"
+    },
+    "correct": "b",
+    "explanation": "Funkcja `solve_ivp()` w SciPy umożliwia wybór metody rozwiązania ODE, w tym `RK45` (Rungego-Kutty rzędu 4(5))."
+  },
+  {
+    "question": "Jakie dane są wymagane do rozwiązania ODE metodą numeryczną?",
+    "options": {
+      "a": "Macierz współczynników i wektor wyrazów wolnych",
+      "b": "Funkcja pochodna, warunki początkowe, przedział",
+      "c": "Funkcja całkowana i przedział całkowania",
+      "d": "Rozkład prawdopodobieństwa i liczba prób"
+    },
+    "correct": "b",
+    "explanation": "Aby rozwiązać ODE numerycznie, należy zdefiniować wyrażenie pochodnej, podać warunki początkowe i określić przedział czasu."
+  },
+  {
+    "question": "Który zapis reprezentuje klasyczne równanie różniczkowe pierwszego rzędu?",
+    "options": {
+      "a": "y''(t) + 3y(t) = 0",
+      "b": "y(t) = sin(t)",
+      "c": "dy/dt = f(t, y)",
+      "d": "y(t+1) = y(t) + h*f(t, y)"
+    },
+    "correct": "c",
+    "explanation": "Równanie różniczkowe pierwszego rzędu przyjmuje postać dy/dt = f(t, y), gdzie pochodna funkcji zależy od zmiennej niezależnej i funkcji."
+  },
+  {
+    "question": "Jaką metodę numeryczną stosuje funkcja `odeint()` w SciPy?",
+    "options": {
+      "a": "Rungego-Kutty rzędu 4(5)",
+      "b": "Eulerowską",
+      "c": "LSODA",
+      "d": "Adams-Bashforth"
+    },
+    "correct": "c",
+    "explanation": "Funkcja `odeint()` oparta jest na algorytmie LSODA, który automatycznie przełącza się między metodą Adamsa a BDF."
+  },
+  {
+    "question": "Czym różni się metoda Eulera od metody Rungego-Kutty?",
+    "options": {
+      "a": "Euler jest metodą analityczną, a Rungego-Kutty numeryczną",
+      "b": "Metoda Eulera używa średniej wartości pochodnej",
+      "c": "Rungego-Kutty jest dokładniejsza, bo uwzględnia pośrednie punkty",
+      "d": "Euler działa tylko dla funkcji wykładniczych"
+    },
+    "correct": "c",
+    "explanation": "Metoda Rungego-Kutty (np. RK4) osiąga większą dokładność niż Euler, ponieważ korzysta z kilku punktów oceny pochodnej w każdym kroku."
+  },
+  {
+    "question": "Który z poniższych kodów przedstawia prawidłowe użycie funkcji `solve_ivp()`?",
+    "options": {
+      "a": "solve_ivp(f, (0, 10), [1])",
+      "b": "solve_ivp([0, 10], f, [1])",
+      "c": "solve_ivp([1], f, (0, 10))",
+      "d": "solve_ivp(f, [1], (0, 10))"
+    },
+    "correct": "a",
+    "explanation": "Prawidłowa składnia `solve_ivp(f, (t0, tf), y0)` wymaga funkcji pochodnej, przedziału czasu i warunku początkowego."
+  },
+  {
+    "question": "W jakim celu stosuje się numeryczne metody rozwiązywania ODE?",
+    "options": {
+      "a": "Do obliczeń algebraicznych",
+      "b": "Gdy równania różniczkowe nie mają rozwiązania analitycznego",
+      "c": "Tylko do wizualizacji wykresów",
+      "d": "Tylko dla funkcji trygonometrycznych"
+    },
+    "correct": "b",
+    "explanation": "Wiele równań różniczkowych nie ma rozwiązania w postaci zamkniętej – w takich przypadkach stosuje się metody numeryczne."
+  },
+
+  {
+    "question": "Która funkcja biblioteki SciPy służy do interpolacji wielomianowej?",
+    "options": {
+      "a": "scipy.interpolate.interp1d",
+      "b": "scipy.optimize.curve_fit",
+      "c": "scipy.interpolate.lagrange",
+      "d": "numpy.polyfit"
+    },
+    "correct": "c",
+    "explanation": "Funkcja `scipy.interpolate.lagrange` umożliwia wyznaczenie wielomianu interpolacyjnego metodą Lagrange’a."
+  },
+  {
+    "question": "Która metoda interpolacji wykorzystuje fragmenty funkcji wielomianowych?",
+    "options": {
+      "a": "Interpolacja Hermite’a",
+      "b": "Interpolacja Newtona",
+      "c": "Interpolacja sklejanymi funkcjami (spline)",
+      "d": "Interpolacja liniowa"
+    },
+    "correct": "c",
+    "explanation": "Interpolacja typu spline dzieli dane na fragmenty i dla każdego przedziału tworzy osobny wielomian, zapewniając ciągłość i gładkość."
+  },
+  {
+    "question": "Do czego służy funkcja `interp1d` z biblioteki SciPy?",
+    "options": {
+      "a": "Do aproksymacji nieliniowej",
+      "b": "Do interpolacji danych 1D",
+      "c": "Do rozwiązania ODE",
+      "d": "Do całkowania numerycznego"
+    },
+    "correct": "b",
+    "explanation": "Funkcja `interp1d` służy do tworzenia funkcji interpolacyjnych na podstawie danych jednowymiarowych."
+  },
+  {
+    "question": "Która z poniższych funkcji Pythona służy do aproksymacji danych metodą najmniejszych kwadratów?",
+    "options": {
+      "a": "scipy.interpolate.interp1d",
+      "b": "numpy.polyfit",
+      "c": "scipy.integrate.quad",
+      "d": "scipy.signal.find_peaks"
+    },
+    "correct": "b",
+    "explanation": "Funkcja `numpy.polyfit` dopasowuje wielomian do danych metodą najmniejszych kwadratów."
+  },
+  {
+    "question": "Jakie zalety posiada interpolacja funkcjami sklejonymi (spline) nad interpolacją wielomianową?",
+    "options": {
+      "a": "Jest szybsza obliczeniowo",
+      "b": "Unika oscylacji Rungego i lepiej zachowuje lokalny charakter funkcji",
+      "c": "Nie wymaga punktów interpolacyjnych",
+      "d": "Działa tylko dla funkcji liniowych"
+    },
+    "correct": "b",
+    "explanation": "Interpolacja typu spline pozwala uniknąć problemu dużych oscylacji przy wielomianach wysokiego stopnia, zachowując lokalną dokładność."
+  },
+  {
+    "question": "Co oznacza pojęcie 'aproksymacja' w kontekście danych numerycznych?",
+    "options": {
+      "a": "Dokładne dopasowanie funkcji do wszystkich punktów",
+      "b": "Szukanie funkcji najlepiej przybliżającej dane z błędem minimalnym",
+      "c": "Wyznaczenie wartości pośrednich",
+      "d": "Rozwiązanie równań różniczkowych"
+    },
+    "correct": "b",
+    "explanation": "Aproksymacja polega na znalezieniu funkcji, która z minimalnym błędem przybliża dane, nawet jeśli nie przechodzi dokładnie przez wszystkie punkty."
+  },
+  {
+    "question": "Jakie jest główne ryzyko stosowania wielomianów wysokiego stopnia do interpolacji globalnej?",
+    "options": {
+      "a": "Szybkie obliczenia",
+      "b": "Mała dokładność",
+      "c": "Efekt Rungego – oscylacje na końcach przedziału",
+      "d": "Zbyt mała liczba punktów interpolacyjnych"
+    },
+    "correct": "c",
+    "explanation": "Wielomiany wysokiego stopnia mogą powodować efekt Rungego, tj. silne oscylacje funkcji interpolacyjnej na końcach przedziału."
+  },
+  {
+    "question": "Który kod dopasowuje prostą do danych punktów za pomocą `numpy.polyfit()`?",
+    "options": {
+      "a": "numpy.polyfit(x, y, 1)",
+      "b": "scipy.interpolate.interp1d(x, y)",
+      "c": "numpy.polyval(x, y, 1)",
+      "d": "scipy.optimize.curve_fit(x, y)"
+    },
+    "correct": "a",
+    "explanation": "`numpy.polyfit(x, y, 1)` dopasowuje wielomian pierwszego stopnia (prostą) do danych x i y."
+  },
+  {
+    "question": "Na czym polega metoda Monte Carlo w kontekście obliczeń numerycznych?",
+    "options": {
+      "a": "Na rozwiązaniu równań różniczkowych",
+      "b": "Na aproksymacji funkcji przez wielomiany",
+      "c": "Na losowym próbkowaniu w celu przybliżenia rozwiązania",
+      "d": "Na iteracyjnym rozwiązywaniu równań liniowych"
+    },
+    "correct": "c",
+    "explanation": "Metoda Monte Carlo polega na wykorzystaniu losowych próbek do przybliżania wyników obliczeń, np. wartości całek czy rozwiązań probabilistycznych."
+  },
+  {
+    "question": "Do czego może być użyta metoda Monte Carlo w obliczeniach całek oznaczonych?",
+    "options": {
+      "a": "Do znajdowania dokładnego rozwiązania analitycznego",
+      "b": "Do znalezienia wartości oczekiwanej poprzez losowe próbkowanie",
+      "c": "Do aproksymacji funkcji wielomianami",
+      "d": "Do przyspieszenia obliczeń metodą Newtona"
+    },
+    "correct": "b",
+    "explanation": "W metodzie Monte Carlo całkę oznaczoną przybliża się jako wartość oczekiwaną funkcji losowej na danym przedziale."
+  },
+  {
+    "question": "Który kod w Pythonie ilustruje prostą metodę Monte Carlo do obliczenia liczby π?",
+    "options": {
+      "a": "np.mean(np.sin(np.random.rand(10000)))",
+      "b": "np.sum(np.random.rand(10000)) / 10000",
+      "c": "np.pi = np.mean(np.random.rand(10000))",
+      "d": "np.mean(x**2 + y**2 <= 1) * 4"
+    },
+    "correct": "d",
+    "explanation": "Obliczanie liczby π metodą Monte Carlo polega na wygenerowaniu punktów w kwadracie i sprawdzeniu, ile z nich znajduje się w kole jednostkowym."
+  },
+  {
+    "question": "Które z poniższych twierdzeń jest prawdziwe dla metody Monte Carlo?",
+    "options": {
+      "a": "Dokładność metody rośnie wykładniczo z liczbą próbek",
+      "b": "Jest deterministyczna i niezależna od losowości",
+      "c": "Dokładność rośnie wolno – w przybliżeniu jak 1/sqrt(N)",
+      "d": "Wymaga znajomości dokładnego rozwiązania do kalibracji"
+    },
+    "correct": "c",
+    "explanation": "Metoda Monte Carlo charakteryzuje się powolną zbieżnością – dokładność rośnie proporcjonalnie do odwrotności pierwiastka z liczby próbek."
+  },
+  {
+    "question": "Który z poniższych przypadków jest dobrym kandydatem do zastosowania metody Monte Carlo?",
+    "options": {
+      "a": "Obliczenia symboliczne",
+      "b": "Całkowanie funkcji o prostym wzorze",
+      "c": "Problemy o dużej liczbie wymiarów (high-dimensional problems)",
+      "d": "Interpolacja funkcji liniowej"
+    },
+    "correct": "c",
+    "explanation": "Metody Monte Carlo są szczególnie użyteczne w problemach wysokowymiarowych, gdzie tradycyjne metody numeryczne są nieefektywne."
+  },
+  {
+    "question": "Jakie są główne wady metody Monte Carlo?",
+    "options": {
+      "a": "Duża złożoność obliczeniowa przy małej liczbie próbek",
+      "b": "Trudność implementacyjna",
+      "c": "Powolna zbieżność i zależność od generatorów losowych",
+      "d": "Zastosowanie tylko do funkcji analitycznych"
+    },
+    "correct": "c",
+    "explanation": "Metoda Monte Carlo cechuje się powolną zbieżnością oraz może być wrażliwa na jakość używanego generatora liczb losowych."
+  },
+  {
+    "question": "Który typ problemu można rozwiązać przy pomocy metody Monte Carlo?",
+    "options": {
+      "a": "Układ równań liniowych",
+      "b": "Symulacja stochastycznego ruchu Browna",
+      "c": "Interpolacja danych eksperymentalnych",
+      "d": "Rozwiązanie równań różniczkowych metodą Eulera"
+    },
+    "correct": "b",
+    "explanation": "Symulacje ruchu Browna i inne procesy losowe są naturalnym zastosowaniem metod Monte Carlo."
+  },
+  {
+    "question": "Jakie jest główne założenie metody Monte Carlo stosowanej do całkowania oznaczonego?",
+    "options": {
+      "a": "Zastosowanie całkowania symbolicznego",
+      "b": "Uśrednianie wartości funkcji na równomiernie rozmieszczonych punktach",
+      "c": "Losowe próbkowanie funkcji w zadanym przedziale i wyznaczenie średniej",
+      "d": "Przybliżenie funkcji wielomianem interpolacyjnym"
+    },
+    "correct": "c",
+    "explanation": "Metoda Monte Carlo polega na losowym próbkowaniu funkcji w przedziale całkowania i wyznaczaniu wartości średniej pomnożonej przez długość przedziału."
+  },
+  {
+    "question": "Która z poniższych metod numerycznego całkowania najlepiej nadaje się do funkcji wielomianowych o niskim stopniu?",
+    "options": {
+      "a": "Monte Carlo",
+      "b": "Simpsona",
+      "c": "Prostokątów",
+      "d": "Gaussa-Legendre’a"
+    },
+    "correct": "b",
+    "explanation": "Metoda Simpsona jest bardzo skuteczna dla funkcji wielomianowych i zapewnia wysoką dokładność przy umiarkowanej liczbie podziałów."
+  },
+  {
+    "question": "Jakie węzły i wagi są wykorzystywane w kwadraturze Gaussa-Legendre’a?",
+    "options": {
+      "a": "Równomiernie rozłożone punkty i jednakowe wagi",
+      "b": "Punkty zerowe wielomianu Legendre’a i odpowiadające im wagi",
+      "c": "Punkty Chebysheva i jednostkowe wagi",
+      "d": "Punkty środkowe podprzedziałów i wagi jednostkowe"
+    },
+    "correct": "b",
+    "explanation": "Kwadratura Gaussa-Legendre’a opiera się na węzłach będących miejscami zerowymi wielomianów Legendre’a oraz specjalnie dobranych wagach."
+  },
+  {
+    "question": "Dlaczego kwadratura Gaussa-Legendre’a daje bardzo wysoką dokładność dla funkcji gładkich?",
+    "options": {
+      "a": "Ponieważ interpoluje funkcję wielomianem niskiego stopnia",
+      "b": "Bo wykorzystuje bardzo dużą liczbę punktów",
+      "c": "Bo dokładnie integruje wielomiany do stopnia 2n−1 przy n węzłach",
+      "d": "Ponieważ używa liczb pseudolosowych do próbkowania"
+    },
+    "correct": "c",
+    "explanation": "Kwadratura Gaussa-Legendre’a dokładnie całkuje wielomiany do stopnia 2n−1, co daje bardzo wysoką dokładność dla funkcji gładkich."
+  },
+  {
+    "question": "W jakim przypadku metoda Monte Carlo jest bardziej preferowana od metod deterministycznych?",
+    "options": {
+      "a": "Dla funkcji liniowych",
+      "b": "W przypadku dużych wymiarów integracji",
+      "c": "Dla funkcji o znanych pierwotnych",
+      "d": "W przypadku funkcji trygonometrycznych"
+    },
+    "correct": "b",
+    "explanation": "Metoda Monte Carlo znajduje zastosowanie głównie w problemach wysokowymiarowych, gdzie inne metody są nieefektywne."
+  },
+  {
+    "question": "Jaki błąd średnio popełnia metoda Monte Carlo w przybliżeniu całki?",
+    "options": {
+      "a": "Maleje wykładniczo z liczbą próbek",
+      "b": "Jest liniowy względem liczby próbek",
+      "c": "Maleje jak 1/sqrt(n)",
+      "d": "Nie zależy od liczby próbek"
+    },
+    "correct": "c",
+    "explanation": "Zbieżność metody Monte Carlo jest powolna – dokładność przybliżenia rośnie jak odwrotność pierwiastka z liczby próbek."
+  },
+  {
+    "question": "Co należy zrobić, aby zastosować kwadraturę Gaussa-Legendre’a na przedziale [a, b] zamiast domyślnego [−1, 1]?",
+    "options": {
+      "a": "Użyć interpolacji funkcji na nowym przedziale",
+      "b": "Przeskalować węzły i pomnożyć wynik przez (b−a)",
+      "c": "Zamienić miejscami a i b",
+      "d": "Wprowadzić wagę równą długości przedziału do każdego węzła"
+    },
+    "correct": "b",
+    "explanation": "Węzły xi przekształcamy na przedział [a,b] za pomocą wzoru x = 0.5*(b-a)*xi + 0.5*(a+b), a całkę mnożymy przez 0.5*(b-a)."
+  },
+  {
+    "question": "Co oznacza wyrażenie `np.random.uniform(a, b, n)` w funkcji `monte_carlo_integral`?",
+    "options": {
+      "a": "Tworzy macierz jednostkową o wymiarach (a, b, n)",
+      "b": "Generuje n losowych punktów z rozkładu normalnego",
+      "c": "Zwraca n próbek z rozkładu jednostajnego na przedziale [a, b]",
+      "d": "Tworzy wektor równomiernie rozłożonych wartości całki"
+    },
+    "correct": "c",
+    "explanation": "Funkcja `np.random.uniform(a, b, n)` generuje `n` losowych wartości równomiernie rozłożonych w przedziale [a, b], wykorzystywanych w Monte Carlo."
+  },
+  {
+    "question": "Dlaczego w funkcji `simpson_integral` liczba punktów to `n+1`?",
+    "options": {
+      "a": "Funkcja `np.linspace` pomija ostatni punkt",
+      "b": "Ponieważ metoda Simpsona wymaga nieparzystej liczby punktów",
+      "c": "Aby mieć dokładnie `n` przedziałów całkowania",
+      "d": "Z powodu błędu zaokrągleń numerycznych"
+    },
+    "correct": "c",
+    "explanation": "Dla `n` podziałów całkowania potrzeba `n+1` punktów – stąd `np.linspace(a, b, n+1)` generuje potrzebną liczbę węzłów."
+  },
+  {
+    "question": "Jaka funkcja w bibliotece SciPy jest wykorzystywana do obliczania całki metodą Simpsona?",
+    "options": {
+      "a": "`simpson_rule`",
+      "b": "`integrate.simps`",
+      "c": "`scipy.integrate.simpson`",
+      "d": "`np.simpson_integral`"
+    },
+    "correct": "c",
+    "explanation": "`scipy.integrate.simpson` to funkcja dostępna w pakiecie `scipy` do obliczania przybliżonych wartości całek metodą Simpsona."
+  },
+  {
+    "question": "Jaka transformacja przekształca węzły `xi` z przedziału [−1, 1] na [a, b] w funkcji `gauss_legendre`?",
+    "options": {
+      "a": "`x = xi * (b - a) + a`",
+      "b": "`x = (b - a) / xi + a`",
+      "c": "`x = 0.5 * (b - a) * xi + 0.5 * (a + b)`",
+      "d": "`x = xi + b - a`"
+    },
+    "correct": "c",
+    "explanation": "Transformacja `x = 0.5 * (b - a) * xi + 0.5 * (a + b)` przeskalowuje węzły z przedziału [−1, 1] do przedziału [a, b]."
+  },
+  {
+    "question": "Co oznacza `np.sum(wi * f(t))` w funkcji `gauss_legendre`?",
+    "options": {
+      "a": "Wyznacza wartość funkcji dla wszystkich punktów i je sumuje",
+      "b": "Sumuje funkcję przeskalowaną przez wagę Gaussa w przeskalowanych punktach",
+      "c": "Wyznacza pole powierzchni pod wykresem funkcji",
+      "d": "Generuje macierz wag do interpolacji"
+    },
+    "correct": "b",
+    "explanation": "`np.sum(wi * f(t))` to główny krok w kwadraturze Gaussa, obliczający ważoną sumę wartości funkcji w przeskalowanych węzłach `t`."
+  },
+  {
+    "question": "Dlaczego `np.linspace(a, b, n+1)` jest lepszy niż `range(a, b)` w kontekście całkowania?",
+    "options": {
+      "a": "Zwraca liczby całkowite",
+      "b": "Umożliwia pracę z dowolnym typem funkcji",
+      "c": "Tworzy równomiernie rozmieszczone punkty zmiennoprzecinkowe",
+      "d": "Zajmuje mniej pamięci"
+    },
+    "correct": "c",
+    "explanation": "`np.linspace` tworzy równomiernie rozmieszczone punkty na przedziale, co jest istotne przy numerycznym całkowaniu."
+  },
+  {
+    "question": "Co oznacza zwracana przez funkcję `gauss_legendre` wartość `np.sum(wi)`?",
+    "options": {
+      "a": "Suma wartości funkcji",
+      "b": "Całka nieprzeskalowana",
+      "c": "Suma wag kwadratury (dla sprawdzenia poprawności)",
+      "d": "Średnia wartość funkcji"
+    },
+    "correct": "c",
+    "explanation": "Suma wag kwadratury Gaussa służy do kontroli poprawności – dla przedziału [−1,1] suma ta powinna wynosić 2."
+  },
+  {
+    "question": "Jakie równania opisują układ dwóch mas połączonych sprężynami tłumionymi w Laboratorium 9?",
+    "options": {
+      "a": "x'' = -k*x - b*v",
+      "b": "a1 = (-k1 * x1 - k2 * (x1 - x2) - b1 * v1) / m1; a2 = (-k2 * (x2 - x1) - b2 * v2) / m2",
+      "c": "a1 = m1 * x1 + m2 * x2; a2 = k1 * v1 + k2 * v2",
+      "d": "x1' = x2; x2' = -x1"
+    },
+    "correct": "b",
+    "explanation": "Równania te wynikają z drugiej zasady dynamiki Newtona i uwzględniają siły sprężystości i tłumienia między masami."
+  },
+  {
+    "question": "Dlaczego metoda Rungego-Kutty czwartego rzędu jest często stosowana w symulacjach układów dynamicznych?",
+    "options": {
+      "a": "Bo ma niski koszt obliczeniowy",
+      "b": "Bo umożliwia dokładne rozwiązania analityczne",
+      "c": "Bo zapewnia wysoką dokładność przy umiarkowanym koszcie numerycznym",
+      "d": "Bo wymaga tylko jednej oceny pochodnej"
+    },
+    "correct": "c",
+    "explanation": "Metoda RK4 osiąga dobrą równowagę między dokładnością a wydajnością numeryczną i nie wymaga wyznaczania pochodnych wyższych rzędów."
+  },
+  {
+    "question": "Jaka jest rola funkcji `derivatives` w implementacji symulacji w Pythonie?",
+    "options": {
+      "a": "Oblicza numerycznie całkę funkcji",
+      "b": "Zwraca wartości zmiennych stanu w czasie t",
+      "c": "Zwraca pochodne stanu w postaci układu równań I rzędu",
+      "d": "Oblicza wartości funkcji harmonicznej"
+    },
+    "correct": "c",
+    "explanation": "Funkcja `derivatives` przekształca równania różniczkowe wyższego rzędu do układu równań I rzędu, wymaganych przez algorytm RK4."
+  },
+  {
+    "question": "Dlaczego zmienna `states` ma rozmiar (len(time), 4) w Laboratorium 9?",
+    "options": {
+      "a": "Przechowuje dane tylko jednej masy",
+      "b": "Układ zawiera dwie masy, każda opisana pozycją i prędkością",
+      "c": "Jest to standardowy format NumPy",
+      "d": "Zawiera wyniki dla czterech różnych układów"
+    },
+    "correct": "b",
+    "explanation": "Dla każdej masy rejestrowana jest pozycja i prędkość, co łącznie daje cztery zmienne stanu w każdym kroku czasowym."
+  },
+  {
+    "question": "Jaka siła działa w Laboratorium 10 na tłumione wahadło z wymuszeniem zewnętrznym?",
+    "options": {
+      "a": "Siła sprężystości liniowej",
+      "b": "Siła tłumienia i siła wymuszenia harmonicznego",
+      "c": "Siła odśrodkowa i siła Coriolisa",
+      "d": "Siła elektrostatyczna"
+    },
+    "correct": "b",
+    "explanation": "Wahadło doświadcza siły tłumienia proporcjonalnej do prędkości oraz siły wymuszenia sinusoidalnego o zadanej amplitudzie i częstotliwości."
+  },
+  {
+    "question": "Jakie są zmienne stanu układu dla wymuszonego wahadła tłumionego?",
+    "options": {
+      "a": "Kąt i energia kinetyczna",
+      "b": "Moment bezwładności i siła tłumienia",
+      "c": "Kąt wychylenia i prędkość kątowa",
+      "d": "Pozycja i przyspieszenie"
+    },
+    "correct": "c",
+    "explanation": "Układ wahadła jest najczęściej opisywany za pomocą kąta oraz jego pochodnej (prędkości kątowej), co stanowi zestaw zmiennych stanu."
+  },
+  {
+    "question": "Jak obliczyć macierz odwrotną dla macierzy `A` w NumPy?",
+    "options": {
+      "a": "np.linalg.inv(A)",
+      "b": "np.linalg.inv(A.T)",
+      "c": "A ** -1",
+      "d": "np.linalg.det(A)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nA_inv = np.linalg.inv(A)\nprint(A_inv)",
+    "explanation": "Funkcja `np.linalg.inv(A)` zwraca macierz odwrotną do macierzy `A`. Odwracalność macierzy zależy od jej wyznacznika."
+  },
+  {
+    "question": "Jak obliczyć wyznacznik macierzy `A` w NumPy?",
+    "options": {
+      "a": "np.linalg.det(A)",
+      "b": "np.linalg.determinant(A)",
+      "c": "A.det()",
+      "d": "np.linalg.inv(A)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\ndet_A = np.linalg.det(A)\nprint(det_A)",
+    "explanation": "Do obliczenia wyznacznika macierzy używamy funkcji `np.linalg.det(A)`. Zwraca ona wartość liczbową."
+  },
+  {
+    "question": "Jak wykonać mnożenie macierzy `A` i `B` w NumPy?",
+    "options": {
+      "a": "A @ B",
+      "b": "A * B",
+      "c": "np.dot(A, B)",
+      "d": "np.multiply(A, B)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nC = A @ B\nprint(C)",
+    "explanation": "W NumPy operator `@` służy do wykonywania mnożenia macierzowego, które jest odpowiednikiem `np.dot()`. Działa również na macierzach o wyższych wymiarach."
+  },
+  {
+    "question": "Jak uzyskać transpozycję macierzy `A` w NumPy?",
+    "options": {
+      "a": "A.T",
+      "b": "np.transpose(A)",
+      "c": "A.transpose()",
+      "d": "wszystkie powyższe"
+    },
+    "correct": "d",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nprint(A.T)\nprint(np.transpose(A))\nprint(A.transpose())",
+    "explanation": "Wszystkie trzy sposoby (`A.T`, `np.transpose(A)`, `A.transpose()`) są poprawne w NumPy i zwracają transponowaną macierz."
+  },
+  {
+    "question": "Jak rozwiązać układ równań `Ax = b` w NumPy?",
+    "options": {
+      "a": "x = np.linalg.inv(A) @ b",
+      "b": "x = np.linalg.solve(A, b)",
+      "c": "x = np.dot(A, b)",
+      "d": "x = np.linalg.eig(A)"
+    },
+    "correct": "b",
+    "code": "import numpy as np\nA = np.array([[3, 2], [1, 4]])\nb = np.array([5, 6])\nx = np.linalg.solve(A, b)\nprint(x)",
+    "explanation": "Funkcja `np.linalg.solve()` jest numercznie stabilna i rozwiązuje układ równań `Ax = b` bez konieczności odwracania macierzy."
+  },
+  {
+    "question": "Jak obliczyć sumę wszystkich elementów w tablicy `A` w NumPy?",
+    "options": {
+      "a": "np.sum(A)",
+      "b": "A.sum()",
+      "c": "np.add(A)",
+      "d": "A.sum(axis=0)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nsum_A = np.sum(A)\nprint(sum_A)",
+    "explanation": "Funkcja `np.sum()` oblicza sumę wszystkich elementów w tablicy. Można także użyć metody `A.sum()`, która daje ten sam wynik."
+  },
+  {
+    "question": "Jak uzyskać elementy macierzy `A` tylko w pierwszej kolumnie?",
+    "options": {
+      "a": "A[:, 0]",
+      "b": "A[0, :]",
+      "c": "A[1, :]",
+      "d": "A[0]"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4], [5, 6]])\nfirst_column = A[:, 0]\nprint(first_column)",
+    "explanation": "Aby uzyskać pierwszą kolumnę macierzy, należy użyć indeksowania `A[:, 0]`, co oznacza, że wybieramy wszystkie wiersze (`:`) i tylko pierwszy element w każdej kolumnie (`0`)."
+  },
+  {
+    "question": "Co zwróci wynik poniższego kodu, który oblicza normę euklidesową wektora w NumPy?",
+    "options": {
+      "a": "Wartość wyznacznika",
+      "b": "Błąd przy rozwiązywaniu równań",
+      "c": "Normę euklidesową wektora",
+      "d": "Macierz jednostkową"
+    },
+    "correct": "c",
+    "code": "import numpy as np\nv = np.array([3, 4])\nnorm_v = np.linalg.norm(v)\nprint(norm_v)",
+    "explanation": "Funkcja `np.linalg.norm(v)` oblicza normę euklidesową wektora `v`, co odpowiada pierwiastkowi z sumy kwadratów jego elementów."
+  },
+  {
+    "question": "Jak obliczyć sumę prostokątów w metodzie całkowania prostokątami?",
+    "options": {
+      "a": "np.sum(f(x) * dx)",
+      "b": "np.sum(f(x) * dt)",
+      "c": "np.sum(f(x) * dy)",
+      "d": "np.sum(f(x) * dz)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx = np.linspace(0, 10, 100)\nf = np.sin(x)\ndx = x[1] - x[0]\nintegral = np.sum(f * dx)\nprint(integral)",
+    "explanation": "Aby obliczyć przybliżoną wartość całki za pomocą metody prostokątów, należy pomnożyć wartości funkcji przez szerokość każdego prostokąta (`dx`) i zsumować."
+  },
+  {
+    "question": "Jak obliczyć przybliżoną wartość całki metodą trapezów?",
+    "options": {
+      "a": "np.trapz(f, x)",
+      "b": "np.sum(f * dx)",
+      "c": "np.trapz(f * dx)",
+      "d": "np.integrate(f, x)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx = np.linspace(0, 10, 100)\nf = np.sin(x)\nintegral = np.trapz(f, x)\nprint(integral)",
+    "explanation": "Funkcja `np.trapz()` oblicza przybliżoną wartość całki za pomocą metody trapezów. Wykorzystuje wartości funkcji na punktach w `x`."
+  },
+  {
+    "question": "Jak zaimplementować metodę Monte Carlo dla obliczenia wartości całki?",
+    "options": {
+      "a": "np.mean(f(x)) * (x_max - x_min)",
+      "b": "np.mean(f(x)) * dt",
+      "c": "np.sum(f(x)) * dx",
+      "d": "np.random.uniform(x_min, x_max, size=n)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx_min, x_max = 0, 10\nn = 1000\nx = np.random.uniform(x_min, x_max, size=n)\nf = np.sin(x)\nintegral = np.mean(f) * (x_max - x_min)\nprint(integral)",
+    "explanation": "Metoda Monte Carlo polega na losowym próbkowaniu funkcji i przybliżeniu wartości całki poprzez średnią wartość funkcji pomnożoną przez szerokość przedziału."
+  },
+  {
+    "question": "Jak obliczyć macierz Hessego dla funkcji dwóch zmiennych w NumPy?",
+    "options": {
+      "a": "np.gradient(np.gradient(f))",
+      "b": "np.linalg.eig(np.array([[df/dx, df/dy], [df/dy, df/dx]]))",
+      "c": "np.array([[df/dx, df/dy], [df/dy, df/dx]])",
+      "d": "np.linalg.inv(np.array([[df/dx, df/dy], [df/dy, df/dx]]))"
+    },
+    "correct": "b",
+    "code": "import numpy as np\nx = np.linspace(-1, 1, 100)\ny = np.linspace(-1, 1, 100)\nX, Y = np.meshgrid(x, y)\nf = X**2 + Y**2\nfx = np.gradient(f, axis=0)\nfy = np.gradient(f, axis=1)\nHessian = np.array([[fx, fy], [fy, fx]])\nprint(Hessian)",
+    "explanation": "Macierz Hessego oblicza drugie pochodne funkcji, co w tym przypadku reprezentuje macierz zawierającą pierwsze i drugie pochodne po `x` i `y`."
+  },
+  {
+    "question": "Jak zrealizować interpolację liniową za pomocą NumPy?",
+    "options": {
+      "a": "np.interp(x_new, x, y)",
+      "b": "np.polyfit(x, y, 1)",
+      "c": "np.interp(y_new, y, x)",
+      "d": "np.polyval(p, x_new)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx = np.array([0, 1, 2])\ny = np.array([0, 1, 4])\nx_new = np.array([0.5, 1.5])\ninterpolated = np.interp(x_new, x, y)\nprint(interpolated)",
+    "explanation": "Funkcja `np.interp()` wykonuje interpolację liniową, obliczając wartości w nowych punktach `x_new` na podstawie danych wejściowych `x` i `y`."
+  },
+  {
+    "question": "Jak obliczyć równanie ruchu dla układu masy-sprężyny w Pythonie?",
+    "options": {
+      "a": "np.sin(t)",
+      "b": "x = x0 * np.cos(omega * t)",
+      "c": "x = x0 * np.exp(-b * t)",
+      "d": "x = np.random.rand()"
+    },
+    "correct": "b",
+    "code": "import numpy as np\nx0 = 1\nomega = 2 * np.pi\nT = 10\nt = np.linspace(0, T, 1000)\nx = x0 * np.cos(omega * t)\nprint(x)",
+    "explanation": "Równanie ruchu dla układu masy-sprężyny można opisać funkcją `x = x0 * np.cos(omega * t)`, gdzie `omega` jest częstością drgań, a `x0` to amplituda."
+  },
+  {
+    "question": "Jak obliczyć gradient funkcji wielomianowej w NumPy?",
+    "options": {
+      "a": "np.gradient(f, x)",
+      "b": "np.diff(f)",
+      "c": "np.mean(f)",
+      "d": "np.linalg.norm(f)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx = np.linspace(0, 10, 100)\nf = x**2\ngradient = np.gradient(f, x)\nprint(gradient)",
+    "explanation": "Funkcja `np.gradient()` oblicza gradient funkcji, czyli wektor zawierający pochodne funkcji w punktach zadanych przez `x`."
+  },
+  {
+    "question": "Jak obliczyć całkowite pole powierzchni wykresu funkcji za pomocą metody trapezów?",
+    "options": {
+      "a": "np.trapz(f, x)",
+      "b": "np.sum(f * dx)",
+      "c": "np.integrate(f)",
+      "d": "np.trapz(f)"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nx = np.linspace(0, 10, 100)\nf = np.sin(x)\narea = np.trapz(f, x)\nprint(area)",
+    "explanation": "Metoda trapezów oblicza pole powierzchni pod wykresem funkcji poprzez sumowanie powierzchni trapezów utworzonych przez punkty na wykresie."
+  },
+  {
+    "question": "Jak rozwiązać układ równań nieliniowych w NumPy?",
+    "options": {
+      "a": "np.linalg.solve()",
+      "b": "np.root()",
+      "c": "np.optimize()",
+      "d": "scipy.optimize.fsolve()"
+    },
+    "correct": "d",
+    "code": "from scipy.optimize import fsolve\nf = lambda x: x**3 - x - 2\nsolution = fsolve(f, 1)\nprint(solution)",
+    "explanation": "Do rozwiązywania układów równań nieliniowych w Pythonie można użyć funkcji `fsolve()` z biblioteki `scipy.optimize`."
   }
 ]
+

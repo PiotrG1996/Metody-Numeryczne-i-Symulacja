@@ -48,25 +48,29 @@ def evaluate_answers(questions: List[Dict], user_answers: Dict) -> Dict:
         "score": 0,
         "results": []
     }
-    
+
     for idx, question in enumerate(questions):
-        user_answer = user_answers.get(str(idx), "").lower()  # Pobierz jako string
+        user_answer = user_answers.get(str(idx), "").lower()
         correct_answer = question["correct"].lower()
         is_correct = user_answer == correct_answer
-        
+
         if is_correct:
             results["score"] += 1
-            
-        results["results"].append({
+
+        result_entry = {
             "question_id": idx,
             "user_answer": user_answer,
-            "is_correct": is_correct
-        })
-    
+            "is_correct": is_correct,
+            "correct_answer": correct_answer,
+            "explanation": question.get("explanation", "") 
+        }
+
+        results["results"].append(result_entry)
+
     return results
-    
-def sanitize_filename(name):
-    if not name:    
+
+def sanitize_filename(name: str) -> str:
+    if not name:
         return "anonymous"
     # Usuń znaki specjalne i zastąp spacje podkreśleniami
     name = re.sub(r'[^\w\s-]', '', name.strip())
