@@ -1,0 +1,8 @@
+kolokwium/venv/
+kolokwium/__pycache__/
+kolokwium/.env
+kolokwium/wyniki/
+/kolokwium.json
+__pycache__/
+*.pyc
+.DS_Store

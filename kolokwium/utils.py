@@ -74,4 +74,9 @@ def sanitize_filename(name: str) -> str:
         return "anonymous"
     # Usuń znaki specjalne i zastąp spacje podkreśleniami
     name = re.sub(r'[^\w\s-]', '', name.strip())
-    return re.sub(r'[-\s]+', '_', name)[:50]    
+    return re.sub(r'[-\s]+', '_', name)[:50]
+
+
+def format_options_markdown(options: Dict[str, str]) -> str:
+    """Formatuje opcje odpowiedzi jako Markdown (obsługa LaTeX i kodu inline)."""
+    return "\n\n".join(f"**{key})** {text}" for key, text in options.items())

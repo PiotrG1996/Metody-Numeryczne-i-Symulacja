@@ -1,0 +1,5 @@
+streamlit>=1.25.0
+pandas>=1.5.0
+python-dotenv
+qrcode[pil]>=7.4.0
+fpdf2>=2.7.0

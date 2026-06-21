@@ -1,0 +1,229 @@
+[
+  {
+    "question": "Jak rozwiązać układ równań liniowych w Pythonie przy użyciu NumPy?",
+    "options": {
+      "a": "Używając `np.linalg.inv()`",
+      "b": "Używając `np.linalg.solve()`",
+      "c": "Używając `np.linalg.det()`",
+      "d": "Używając `np.linalg.eig()`"
+    },
+    "correct": "b",
+    "code": "import numpy as np\nA = np.array([[3, 1], [1, 2]])\nb = np.array([9, 8])\nx = np.linalg.solve(A, b)",
+    "explanation": "Funkcja `np.linalg.solve()` jest dedykowana do rozwiązywania układów $Ax = b$ i jest numerycznie stabilniejsza niż odwracanie macierzy."
+  },
+  {
+    "question": "Która metoda całkowania numerycznego przybliża funkcję podcałkową za pomocą wielomianu stopnia 1 (funkcji liniowej)?",
+    "options": {
+      "a": "Metoda prostokątów",
+      "b": "Metoda trapezów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "b",
+    "explanation": "Metoda trapezów zastępuje funkcję linią prostą między dwoma sąsiednimi węzłami, co odpowiada wielomianowi stopnia pierwszego."
+  },
+  {
+    "question": "Jaka jest zależność błędu metody Monte Carlo od liczby próbek $N$?",
+    "options": {
+      "a": "Błąd maleje wykładniczo",
+      "b": "Błąd maleje jak $1/N$",
+      "c": "Błąd maleje jak $1/\\sqrt{N}$",
+      "d": "Błąd nie zależy od $N$"
+    },
+    "correct": "c",
+    "explanation": "Metoda Monte Carlo ma zbieżność rzędu $O(1/\\sqrt{N})$ — aby zwiększyć dokładność 10-krotnie, trzeba zwiększyć liczbę próbek ok. 100-krotnie."
+  },
+  {
+    "question": "Która funkcja z biblioteki SciPy służy do rozwiązywania równań różniczkowych zwyczajnych (ODE) z możliwością wyboru metody (np. RK45)?",
+    "options": {
+      "a": "`scipy.integrate.odeint`",
+      "b": "`scipy.integrate.solve_ivp`",
+      "c": "`scipy.optimize.fsolve`",
+      "d": "`scipy.integrate.simpson`"
+    },
+    "correct": "b",
+    "code": "from scipy.integrate import solve_ivp\n\nsol = solve_ivp(f, [0, 10], y0, method='RK45')",
+    "explanation": "`solve_ivp()` to nowoczesne API w SciPy do rozwiązywania ODE, umożliwiające wybór metody (np. `'RK45'`, `'BDF'`)."
+  },
+  {
+    "question": "Co oznacza wyznacznik macierzy równy 0 w kontekście układu równań liniowych?",
+    "options": {
+      "a": "Układ ma dokładnie jedno rozwiązanie",
+      "b": "Macierz jest nieosobliwa",
+      "c": "Macierz jest osobliwa — układ jest sprzeczny lub ma nieskończenie wiele rozwiązań",
+      "d": "Układ można rozwiązać tylko metodą Gaussa"
+    },
+    "correct": "c",
+    "explanation": "Wyznacznik zerowy oznacza, że macierz jest osobliwa (nieodwracalna), co uniemożliwia jednoznaczne rozwiązanie układu."
+  },
+  {
+    "question": "Która metoda interpolacji jest szczególnie podatna na efekt Rungego (osilacje) przy dużej liczbie równomiernie rozmieszczonych węzłów?",
+    "options": {
+      "a": "Interpolacja sklejanymi wielomianami (spline)",
+      "b": "Interpolacja Lagrange'a",
+      "c": "Interpolacja liniowa odcinkami",
+      "d": "Aproksymacja metodą najmniejszych kwadratów"
+    },
+    "correct": "b",
+    "explanation": "Interpolacja Lagrange'a dla wielomianów wysokiego stopnia może prowadzić do silnych oscylacji na krańcach przedziału — jest to efekt Rungego."
+  },
+  {
+    "question": "Jaki jest wzór iteracyjny metody Newtona-Raphsona do znajdowania miejsc zerowych funkcji $f(x)$?",
+    "options": {
+      "a": "$x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}$",
+      "b": "$x_{n+1} = x_n + \\dfrac{f(x_n)}{f'(x_n)}$",
+      "c": "$x_{n+1} = x_n - \\dfrac{f'(x_n)}{f(x_n)}$",
+      "d": "$x_{n+1} = \\dfrac{f(x_n)}{f''(x_n)}$"
+    },
+    "correct": "a",
+    "explanation": "Metoda Newtona-Raphsona wykorzystuje styczną w punkcie $x_n$, stąd wzór $x_{n+1} = x_n - f(x_n)/f'(x_n)$."
+  },
+  {
+    "question": "Która z metod rozwiązywania równań nieliniowych jest metodą przedziałową i wymaga zmiany znaku funkcji na końcach przedziału?",
+    "options": {
+      "a": "Metoda Newtona-Raphsona",
+      "b": "Metoda bisekcji",
+      "c": "Metoda siecznych",
+      "d": "Metoda punktu stałego"
+    },
+    "correct": "b",
+    "explanation": "Metoda bisekcji opiera się na twierdzeniu Bolzano — jeśli $f(a) \\cdot f(b) < 0$, to w przedziale $(a, b)$ istnieje pierwiastek."
+  },
+  {
+    "question": "Który operator w NumPy służy do wykonywania mnożenia macierzowego (iloczynu macierzy)?",
+    "options": {
+      "a": "`A * B` — mnożenie element po elemencie",
+      "b": "`A @ B` — iloczyn macierzy",
+      "c": "`A ** B` — potęgowanie element po elemencie",
+      "d": "`A & B` — iloczyn logiczny bitowy"
+    },
+    "correct": "b",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nC = A @ B",
+    "explanation": "Operator `@` (Python 3.5+) służy do mnożenia macierzy. Operator `*` wykonuje mnożenie element po elemencie."
+  },
+  {
+    "question": "W jaki sposób można zwiększyć dokładność metody trapezów przy zachowaniu tego samego przedziału całkowania?",
+    "options": {
+      "a": "Zmniejszając liczbę podprzedziałów",
+      "b": "Zwiększając liczbę podprzedziałów (mniejszy krok $h$)",
+      "c": "Używając stałej wartości funkcji",
+      "d": "Całkując analitycznie"
+    },
+    "correct": "b",
+    "explanation": "Większa liczba podprzedziałów (mniejszy krok $h$) powoduje lepsze lokalne przybliżenie liniowe i wyższą dokładność."
+  },
+  {
+    "question": "Jaką funkcję należy użyć w SciPy do obliczenia całki metodą Simpsona na podstawie wektorów `x` i `y`?",
+    "options": {
+      "a": "`scipy.integrate.trapezoid`",
+      "b": "`scipy.integrate.simpson`",
+      "c": "`scipy.integrate.quad`",
+      "d": "`scipy.integrate.romberg`"
+    },
+    "correct": "b",
+    "code": "from scipy.integrate import simpson\n\nx = np.linspace(0, np.pi, 100)\ny = np.sin(x)\nI = simpson(y, x)",
+    "explanation": "`scipy.integrate.simpson(y, x)` oblicza całkę metodą Simpsona (następca dawnej funkcji `simps`)."
+  },
+  {
+    "question": "Dlaczego w praktyce często zamiast jednego wielomianu wysokiego stopnia stosuje się interpolację splajnami kubicznymi?",
+    "options": {
+      "a": "Bo splajny są zawsze dokładniejsze",
+      "b": "Bo splajny zapewniają ciągłość pierwszej i drugiej pochodnej, unikając oscylacji",
+      "c": "Bo splajny wymagają mniej punktów danych",
+      "d": "Bo interpolacja Lagrange'a nie działa dla nierównomiernych węzłów"
+    },
+    "correct": "b",
+    "explanation": "Splajny kubiczne dają gładką krzywą (ciągłość pochodnych do rzędu 2) i eliminują problem oscylacji Rungego."
+  },
+  {
+    "question": "Który kod w NumPy poprawnie oblicza macierz odwrotną do macierzy `A`?",
+    "options": {
+      "a": "`np.linalg.inv(A)`",
+      "b": "`A.inv()`",
+      "c": "`np.linalg.invert(A)`",
+      "d": "`np.inverse(A)`"
+    },
+    "correct": "a",
+    "code": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nA_inv = np.linalg.inv(A)",
+    "explanation": "Poprawna składnia to `np.linalg.inv(A)`. Macierz musi być kwadratowa i nieosobliwa."
+  },
+  {
+    "question": "Która metoda całkowania numerycznego zwykle daje najlepszy stosunek dokładności do kosztu obliczeń dla gładkich funkcji (np. wielomianów)?",
+    "options": {
+      "a": "Metoda prostokątów",
+      "b": "Metoda trapezów",
+      "c": "Metoda Simpsona",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "c",
+    "explanation": "Metoda Simpsona (paraboliczna) ma wyższy rząd dokładności niż trapezy przy porównywalnym koszcie, co czyni ją korzystną dla funkcji gładkich."
+  },
+  {
+    "question": "Która z poniższych funkcji **nie** należy do modułu `numpy.linalg`?",
+    "options": {
+      "a": "`np.linalg.solve`",
+      "b": "`np.linalg.eig`",
+      "c": "`np.linalg.integrate`",
+      "d": "`np.linalg.det`"
+    },
+    "correct": "c",
+    "explanation": "`np.linalg.integrate` nie istnieje — funkcje całkowania znajdują się w `scipy.integrate`, nie w `numpy.linalg`."
+  },
+  {
+    "question": "Jaki jest warunek konieczny do rozpoczęcia metody bisekcji dla funkcji $f(x)$ na przedziale $[a, b]$?",
+    "options": {
+      "a": "$f(a) > 0$ i $f(b) > 0$",
+      "b": "$f(a) \\cdot f(b) < 0$",
+      "c": "$f(a) = f(b)$",
+      "d": "$f(a) + f(b) = 0$"
+    },
+    "correct": "b",
+    "explanation": "Metoda bisekcji wymaga zmiany znaku na końcach przedziału: $f(a) \\cdot f(b) < 0$ (twierdzenie Bolzano)."
+  },
+  {
+    "question": "Która **nowsza, zalecana** funkcja SciPy służy do znajdowania pierwiastków układów równań nieliniowych?",
+    "options": {
+      "a": "`scipy.optimize.root`",
+      "b": "`scipy.optimize.fsolve`",
+      "c": "`scipy.optimize.minimize`",
+      "d": "`scipy.optimize.curve_fit`"
+    },
+    "correct": "a",
+    "code": "from scipy.optimize import root\n\nf = lambda x: [x[0]**2 + x[1]**2 - 1, x[0] - x[1]]\nsol = root(f, [0.5, 0.5])",
+    "explanation": "`scipy.optimize.root` to ogólne, nowoczesne API do układów nieliniowych. `fsolve` to starsza, wciąż używana alternatywa."
+  },
+  {
+    "question": "Jak obliczyć całkę oznaczoną metodą prostokątów (punkt środkowy) w NumPy?",
+    "options": {
+      "a": "`np.sum(f * h)` — wartości $f$ w punktach środkowych, krok $h$",
+      "b": "`np.trapz(f, x)` — metoda trapezów",
+      "c": "`np.cumsum(f)[-1]` — suma skumulowana",
+      "d": "`np.mean(f) / h` — średnia podzielona przez krok"
+    },
+    "correct": "a",
+    "code": "import numpy as np\n\na, b, n = 0, np.pi, 1000\nh = (b - a) / n\nx_mid = a + (np.arange(n) + 0.5) * h\nf = np.sin(x_mid)\nintegral = np.sum(f * h)",
+    "explanation": "W metodzie punktu środkowego całkę przybliża się jako $\\sum f(x_i^*) \\cdot h$, gdzie $x_i^*$ to środki podprzedziałów."
+  },
+  {
+    "question": "Które stwierdzenie dotyczące metody Rungego-Kutty rzędu 4 (RK4) jest prawdziwe?",
+    "options": {
+      "a": "Jest to metoda jednokrokowa — w każdym kroku oblicza 4 pośrednie nachylenia ($k_1, k_2, k_3, k_4$)",
+      "b": "Jest to metoda wielokrokowa wykorzystująca 4 poprzednie wartości",
+      "c": "Jest to metoda jawna wymagająca znajomości drugiej pochodnej",
+      "d": "Jest zawsze stabilna dla dowolnego kroku czasowego"
+    },
+    "correct": "a",
+    "explanation": "RK4 jest jednokrokową metodą jawną — w każdym kroku oblicza 4 nachylenia i tworzy ich ważoną średnią."
+  },
+  {
+    "question": "Która z metod jest najczęściej stosowana do przybliżania całek w wysokich wymiarach (np. 10D) ze względu na „przekleństwo wymiarowości”?",
+    "options": {
+      "a": "Metoda prostokątów na siatce równomiernej",
+      "b": "Metoda trapezów na siatce równomiernej",
+      "c": "Metoda Simpsona na siatce równomiernej",
+      "d": "Metoda Monte Carlo"
+    },
+    "correct": "d",
+    "explanation": "Metody deterministyczne wymagają wykładniczo rosnącej liczby punktów wraz z wymiarem. Monte Carlo jest znacznie mniej wrażliwe na wymiar."
+  }
+]
